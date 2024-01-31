@@ -1,15 +1,10 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import api from '@/services/api'
 import { ModalBody, ModalFooter, ModalHeader } from '@nextui-org/modal'
-import { Checkbox, Input } from '@nextui-org/react'
+import { Input } from '@nextui-org/react'
 import { Button } from '@nextui-org/button'
-import { User } from '@/types/User'
 import { toast } from 'sonner'
-
-type Props = {
-  user: User
-  setUser: any
-}
+import { UserContext } from '@/app/hooks/useUser'
 
 type Errors = {
   [key: string]: {
@@ -19,13 +14,15 @@ type Errors = {
 }
 
 // @ts-ignore
-export default function RegisterForm({ user, setUser }: Props) {
+export default function RegisterForm() {
   const [errors, setErrors] = useState({} as Errors)
+  const { user, setUser } = useContext(UserContext)
+
   function sortErrors(errors: any) {
     const errorsSorted = {}
     for (const errorIndex in errors) {
       const error = errors[errorIndex]
-      console.log(error)
+
       // @ts-ignore
       errorsSorted[error.field] = {
         field: error.field,
@@ -52,7 +49,7 @@ export default function RegisterForm({ user, setUser }: Props) {
         error: null
       })
 
-      toast.success("Bienvenue parmis nous " + response.data.user.username, {
+      toast.success("Welcome " + response.data.user.username, {
         position: "bottom-right",
         duration: 5000,
       })
@@ -65,13 +62,13 @@ export default function RegisterForm({ user, setUser }: Props) {
   return (
       <form onSubmit={register}>
         <ModalHeader
-            className="flex flex-col gap-1 items-center justify-center text-3xl">Inscription</ModalHeader>
+            className="flex flex-col gap-1 items-center justify-center text-3xl">Register</ModalHeader>
         <ModalBody>
           <Input
               autoFocus
               name="username"
-              label="Nom d'utilisateur"
-              placeholder="Entrez votre nom d'utilisateur"
+              label="Username"
+              placeholder="Enter your username"
               variant="bordered"
               color={errors.username ? 'danger' : 'primary'}
               errorMessage={errors.username?.message}
@@ -80,25 +77,25 @@ export default function RegisterForm({ user, setUser }: Props) {
                 autoFocus
                 name="email"
                 label="Email"
-                placeholder="Entrez votre email"
+                placeholder="Enter your email"
                 variant="bordered"
                 color={errors.email ? 'danger' : 'primary'}
                 errorMessage={errors.email?.message}
             />
           <div className="flex space-x-4">
             <Input
-                label="Mot de passe"
+                label="Password"
                 name="password"
-                placeholder="Entrez votre mot de passe"
+                placeholder="Enter your password"
                 type="password"
                 variant="bordered"
                 color={errors.password ? 'danger' : 'primary'}
                 errorMessage={errors.password?.message}
             />
             <Input
-                label="Répetez votre mot de passe"
+                label="Repeat Password"
                 name="repeat_password"
-                placeholder="Entrez votre mot de passe"
+                placeholder="Enter your password"
                 type="password"
                 variant="bordered"
                 color={errors.repeat_password ? 'danger' : 'primary'}
@@ -108,7 +105,7 @@ export default function RegisterForm({ user, setUser }: Props) {
         </ModalBody>
         <ModalFooter>
           <Button fullWidth color="primary" type="submit">
-            Inscription
+            Register
           </Button>
         </ModalFooter>
       </form>

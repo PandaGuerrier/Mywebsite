@@ -17,25 +17,25 @@ import {
 import AuthModal from '@/app/components/auth/AuthModal'
 import ThemeComponent from '@/app/components/ThemeComponent'
 import { deleteClientSession } from '@/functions/deleteClientSession/deleteClientSession'
-import { User } from '@/types/User'
+import { getNulledUser, User } from '@/types/User'
+import { UserContext } from '@/app/hooks/useUser'
 
-type Props = {
-  user: User
-  setUser: any,
-  theme: string,
-  setTheme: any
-}
-export default function NavBar({ user, setUser, theme, setTheme }: Props) {
+export default function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [linkEnable, setLinkEnabled] = React.useState(0)
+  const { user, setUser } = React.useContext(UserContext)
 
   const links = [
     {
-      name: "Accueil",
+      name: "Home",
       link: "/",
     },
     {
-      name: "Créations",
+      name: "About me",
+      link: "#about"
+    },
+    {
+      name: "Creations",
       link: "#creations"
     },
     {
@@ -46,11 +46,11 @@ export default function NavBar({ user, setUser, theme, setTheme }: Props) {
   
   async function signOut() {
     await deleteClientSession()
-    setUser({} as any)
+    setUser(getNulledUser())
   }
 
   return (
-      <Navbar onMenuOpenChange={setIsMenuOpen} isBordered className="fixed dark:bg-black">
+      <Navbar onMenuOpenChange={setIsMenuOpen} isBordered className="fixed ">
         <NavbarContent>
           <NavbarMenuToggle
               aria-label={isMenuOpen ? "Close menu" : "Open menu"}
@@ -87,27 +87,27 @@ export default function NavBar({ user, setUser, theme, setTheme }: Props) {
               </DropdownTrigger>
               <DropdownMenu aria-label="Profile Actions" variant="faded">
                 <DropdownItem key="profile" className="h-14 gap-2">
-                  <p className="font-semibold">Connecté en tant que </p>
+                  <p className="font-semibold">Connected as </p>
                   <p className="font-semibold">{user.email}</p>
                 </DropdownItem>
-                <DropdownItem key="settings">Paramètres</DropdownItem>
+                <DropdownItem key="settings">Settings</DropdownItem>
                 {
                     user.role === 'admin' ?
-                      <DropdownItem key="dashboard">Dashboard admin</DropdownItem>
+                      <DropdownItem key="dashboard">Dashboard</DropdownItem>
                         :
-                        <DropdownItem key="d" className={"hidden"}>Dashboard admin</DropdownItem>
+                        <DropdownItem key="d" className={"hidden"}>Dashboard</DropdownItem>
                 }
                 <DropdownItem key="logout" color="danger" onClick={signOut}>
-                  Déconnexion
+                  Logout
                 </DropdownItem>
               </DropdownMenu>
             </Dropdown>
           </> :
           <>
-            <AuthModal user={user} setUser={setUser} selectedStr="login" />
+            <AuthModal selectedStr="login" />
           </>
           }
-          <ThemeComponent setTheme={setTheme} theme={theme}  />
+          <ThemeComponent />
 
         </NavbarContent>
         <NavbarMenu>

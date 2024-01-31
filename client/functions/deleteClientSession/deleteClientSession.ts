@@ -6,7 +6,7 @@ import { toast } from 'sonner'
 export async function deleteClientSession(): Promise<void> {
   try {
     await api.delete('/auth/logout')
-    toast.success("Vous êtes bien déconnecté !", {
+    toast.success("You have been logout !", {
       position: "bottom-right",
       duration: 5000,
     })

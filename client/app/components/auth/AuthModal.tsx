@@ -5,7 +5,7 @@ import LoginForm from './LoginForm'
 import RegisterForm from '@/app/components/auth/RegisterForm'
 
 // @ts-ignore
-export default function AuthModal({user, setUser, selectedStr}) {
+export default function AuthModal({ selectedStr }) {
   const [selected, setSelected] = React.useState(selectedStr)
   const {isOpen, onOpen, onOpenChange, onClose} = useDisclosure()
 
@@ -15,14 +15,14 @@ export default function AuthModal({user, setUser, selectedStr}) {
           <h1 onClick={() => {
             onOpen()
             setSelected('login')
-          }} className="text-blue-600 cursor-pointer">Connexion</h1>
+          }} className="text-blue-600 cursor-pointer">Login</h1>
         </NavbarItem>
         <NavbarItem>
           <Button onPress={() => {
             onOpen()
             setSelected('register')
           }} color="primary" variant="flat">
-            Inscription
+            Register
           </Button>
         </NavbarItem>
         <Modal
@@ -43,11 +43,11 @@ export default function AuthModal({user, setUser, selectedStr}) {
                           selectedKey={selected}
                           onSelectionChange={setSelected}
                       >
-                        <Tab key="login" title="Connexion">
-                          <LoginForm user={user} setUser={setUser} />
+                        <Tab key="login" title="Login">
+                          <LoginForm />
                         </Tab>
-                        <Tab key="register" title="Inscription">
-                          <RegisterForm user={user} setUser={setUser} />
+                        <Tab key="register" title="Register">
+                          <RegisterForm />
                         </Tab>
                       </Tabs>
                     </CardBody>
