@@ -12,10 +12,12 @@ export default function AuthModal({ selectedStr }) {
   return (
       <>
         <NavbarItem className="hidden lg:flex">
-          <h1 onClick={() => {
+          <Button onPress={() => {
             onOpen()
             setSelected('login')
-          }} className="text-blue-600 cursor-pointer">Login</h1>
+          }} color="primary" variant="light">
+            Login
+          </Button>
         </NavbarItem>
         <NavbarItem>
           <Button onPress={() => {

@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@codaworks/react-glow": "^1.0.6",
     "@nextui-org/react": "^2.2.9",
     "@splinetool/react-spline": "^2.2.6",
     "@splinetool/runtime": "^1.0.38",
@@ -25,6 +26,7 @@
     "next": "13.4.12",
     "next-themes": "^0.2.1",
     "react": "^18",
+    "react-animated-cursor": "^2.11.2",
     "react-dom": "^18",
     "react-native": "^0.73.3",
     "sonner": "^1.4.0",

@@ -700,6 +700,11 @@
     "@babel/helper-validator-identifier" "^7.22.20"
     to-fast-properties "^2.0.0"
 
+"@codaworks/react-glow@^1.0.6":
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/@codaworks/react-glow/-/react-glow-1.0.6.tgz#8c4bdb6242506b019069c3ea54e38a7fc30c912e"
+  integrity sha512-tlRept1grsMZCh84ZDSEbjRhibjuXeBi+AkZw9ZzdIk45MDbukI3MhH1KVlactWfYcwEQDnfnNEzcErEak3M1Q==
+
 "@emotion/is-prop-valid@^0.8.2":
   version "0.8.8"
   resolved "https://registry.yarnpkg.com/@emotion/is-prop-valid/-/is-prop-valid-0.8.8.tgz#db28b1c4368a259b60a97311d6a952d4fd01ac1a"
@@ -6592,6 +6597,11 @@ range-parser@~1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/range-parser/-/range-parser-1.2.1.tgz#3cf37023d199e1c24d1a55b84800c2f3e6468031"
   integrity sha512-Hrgsx+orqoygnmhFbKaHE6c296J+HTAQXoxEF6gNupROmmGJRoyzfG3ccAveqCBrwr/2yxQ5BVd/GTl5agOwSg==
+
+react-animated-cursor@^2.11.2:
+  version "2.11.2"
+  resolved "https://registry.yarnpkg.com/react-animated-cursor/-/react-animated-cursor-2.11.2.tgz#c87ee77ecea22cc6c234918375ace6bceca6b3c7"
+  integrity sha512-LV0PtST61tdeW/chCqFt1JLp6i0d5fD9v2uradBcPAkKKCi2Iw7sAcD11ADS1TjXPPj9MOoD9YubEt++/IbZ+g==
 
 react-devtools-core@^4.27.7:
   version "4.28.5"

@@ -7,6 +7,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import LogoAnimated from '@/app/components/animations/LogoAnimated'
 import { UserProvider } from '@/app/hooks/useUser'
 import { ThemeProvider } from '@/app/hooks/useTheme'
+import AnimatedCursor from 'react-animated-cursor'
 
 const HomeLayout = ({children}: {
   children: React.ReactNode
@@ -20,10 +21,40 @@ const HomeLayout = ({children}: {
   }, [])
 
   return (
-      <NextUIProvider className="w-full h-full text-foreground bg-transparent">
+      <NextUIProvider className="w-full h-full text-foreground bg-transparent cursor-none">
         <AnimatePresence mode="popLayout" initial={isLoad}>
           <ThemeProvider>
             <UserProvider>
+              <AnimatedCursor
+                  innerSize={8}
+                  outerSize={9}
+                  color='37, 99, 235'
+                  outerAlpha={0.2}
+                  innerScale={0.7}
+                  outerScale={5}
+                  clickables={[
+                    'a',
+                    'input[type="text"]',
+                    'input[type="email"]',
+                    'input[type="number"]',
+                    'input[type="submit"]',
+                    'input[type="image"]',
+                    'label[for]',
+                    'select',
+                    'textarea',
+                    'button',
+                    '.link',
+                    {
+                      target: '.about',
+                      innerSize: 12,
+                      outerSize: 12,
+                      color: '255, 255, 255',
+                      outerAlpha: 0.3,
+                      innerScale: 0.7,
+                      outerScale: 5
+                    }
+                  ]}
+              />
               {
                 isLoad ? (
                     <>
@@ -40,6 +71,7 @@ const HomeLayout = ({children}: {
                       >
                         <Navbar/>
                       </motion.div>
+
                       {children}
                     </>
                 ) : (
