@@ -15,16 +15,22 @@ export default class Project extends BaseModel {
   declare text: string
 
   @column()
-  declare slug: string // slug is a url friendly version of the title
-
-  @column()
-  declare image: string | null // cdn id
+  declare image: string | null // image is a url to the image file
 
   @column()
   declare isPublished: boolean
 
   @column()
+  declare color: string
+
+  @column()
   declare isPin: boolean
+
+  @column()
+  declare userId: number
+
+  @column()
+  declare tags: string[]
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime

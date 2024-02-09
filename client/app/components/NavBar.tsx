@@ -49,6 +49,10 @@ export default function NavBar() {
     setUser(getNulledUser())
   }
 
+  function redirect(url: string)  {
+    window.location.href = url
+  }
+
   return (
       <Navbar onMenuOpenChange={setIsMenuOpen} isBordered className="fixed ">
         <NavbarContent>
@@ -93,7 +97,7 @@ export default function NavBar() {
                 <DropdownItem key="settings">Settings</DropdownItem>
                 {
                     user.role === 'admin' ?
-                      <DropdownItem key="dashboard">Dashboard</DropdownItem>
+                      <DropdownItem onClick={() => redirect("/dashboard")} key="dashboard">Dashboard</DropdownItem>
                         :
                         <DropdownItem key="d" className={"hidden"}>Dashboard</DropdownItem>
                 }

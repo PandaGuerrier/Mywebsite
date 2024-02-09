@@ -9,10 +9,14 @@ export default class extends BaseSchema {
       table.string('title').notNullable()
       table.string('description').notNullable()
       table.text('text').notNullable()
-      table.string('slug').notNullable()
       table.string('image').nullable()
       table.boolean('is_published').defaultTo(false)
       table.boolean('is_pin').defaultTo(false)
+      table.json('tags').nullable()
+      table.string('color').notNullable()
+      table.integer('user_id').unsigned().notNullable()
+      table.foreign('user_id').references('id').inTable('users').onDelete('CASCADE')
+
 
       table.timestamp('created_at')
       table.timestamp('updated_at')

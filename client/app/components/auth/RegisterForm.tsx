@@ -6,7 +6,7 @@ import { Button } from '@nextui-org/button'
 import { toast } from 'sonner'
 import { UserContext } from '@/app/hooks/useUser'
 
-type Errors = {
+export type Errors = {
   [key: string]: {
     field: string
     message: string

@@ -6,14 +6,61 @@ import BlurBallComponent from '@/app/components/BlurBall'
 import { Button, Card, CardBody, Link, Image } from '@nextui-org/react'
 import { Glow, GlowCapture } from '@codaworks/react-glow'
 import { CardFooter } from '@nextui-org/card'
+import { getProjects } from '@/functions/getProjects/getProjects'
+import { Project } from '@/types/Project'
+import { Tooltip } from '@rewind-ui/core'
 
 export default function Home() {
   const [word, setWord] = React.useState('')
+  const [projects, setProjects] = React.useState([] as Project[])
 
   const words = [
     'dart',
     'web',
     'bot'
+  ]
+
+  const technos = [
+    {
+      name: 'Dart',
+      color: '#0175C2',
+      icon: 'https://www.vectorlogo.zone/logos/dartlang/dartlang-icon.svg'
+    },
+    {
+      name: 'React',
+      color: '#61DAFB',
+      icon: 'https://www.vectorlogo.zone/logos/reactjs/reactjs-icon.svg'
+    },
+    {
+      name: 'AdonisJs',
+      color: '#220052',
+      icon: 'https://www.vectorlogo.zone/logos/adonisjs/adonisjs-icon.svg'
+    },
+    {
+      name: 'TailwindCSS',
+      color: '#38B2AC',
+      icon: 'https://www.vectorlogo.zone/logos/tailwindcss/tailwindcss-icon.svg'
+    },
+    {
+      name: 'Next.js',
+      color: '#000000',
+      icon: 'https://upload.vectorlogo.zone/logos/nextjs/images/60eff509-53dd-4280-92e7-7318fa02e934.svg'
+    },
+    {
+      name: 'PostgreSQL',
+      color: '#336791',
+      icon: 'https://www.vectorlogo.zone/logos/postgresql/postgresql-icon.svg'
+    },
+    {
+      name: 'Java',
+      color: '#007396',
+      icon: 'https://www.vectorlogo.zone/logos/java/java-icon.svg'
+    },
+    {
+      name: 'TypeScript',
+      color: '#3178C6',
+      icon: 'https://www.vectorlogo.zone/logos/typescriptlang/typescriptlang-icon.svg'
+    }
   ]
 
   useEffect(() => {
@@ -25,52 +72,19 @@ export default function Home() {
         i = 0
       }
     }, 2000)
+
     return () => clearInterval(interval)
   }, [])
 
+  useEffect(() => {
+    (async () => {
+      const projects = await getProjects(false)
+      console.log(projects)
+      setProjects(projects as Project[])
+    })()
+  }, [])
+
   const age = Math.floor((Date.now() - new Date('2007-07-22').getTime()) / 31536000000)
-  const list = [
-    {
-      title: 'Orange',
-      img: '/images/fruit-1.jpeg',
-      price: '$5.50'
-    },
-    {
-      title: 'Tangerine',
-      img: '/images/fruit-2.jpeg',
-      price: '$3.00'
-    },
-    {
-      title: 'Raspberry',
-      img: '/images/fruit-3.jpeg',
-      price: '$10.00'
-    },
-    {
-      title: 'Lemon',
-      img: '/images/fruit-4.jpeg',
-      price: '$5.30'
-    },
-    {
-      title: 'Avocado',
-      img: '/images/fruit-5.jpeg',
-      price: '$15.70'
-    },
-    {
-      title: 'Lemon 2',
-      img: '/images/fruit-6.jpeg',
-      price: '$8.00'
-    },
-    {
-      title: 'Banana',
-      img: '/images/fruit-7.jpeg',
-      price: '$7.50'
-    },
-    {
-      title: 'Watermelon',
-      img: '/images/fruit-8.jpeg',
-      price: '$12.20'
-    }
-  ]
 
   return (
       <>
@@ -111,6 +125,7 @@ export default function Home() {
           </div>
 
           <div className={'w-full h-full bg-gray-950 py-4 z-50 mt-24'}>
+
             <h1 className={'text-white text-3xl md:text-6xl justify-center text-center z-20'}><span
                 className={'about bg-clip-content'}>About me</span></h1>
             <div className={'flex w-full h-full justify-center'}>
@@ -123,42 +138,64 @@ export default function Home() {
                     Hey, my name is Jules, and I'm {age} years old. Since I was very young, I've been passionate about
                     computers. Three years ago, I discovered programming, a pivotal moment in my life, thanks to my
                     project Conodia. This project was a real eye-opener for me, allowing me to dive deep into
-                    programming and explore all its possibilities. My enthusiasm for computer science keeps growing, and
+                    programming and explore all its possibilities. My enthusiasm for computer science keeps growing,
+                    and
                     I'm always on the lookout for new challenges to tackle in this fascinating field.
                   </p>
                   <p>
                     Get a look at my <Link href={'#creations'}>creations</Link> !
                   </p>
-                </div>
+                  <GlowCapture>
 
+                    <h1 className={'mb-3 text-2xl'}>My Stacks</h1>
+                    <div className={'flex gap-4'}>
+                      {
+                        technos.map((item, index) => (
+                            <Tooltip content={item.name} key={index}>
+                              <Glow color={item.color}>
+                                <div className={'flex w-[60px] h-[60px] justify-center items-center bg-gray-800 glow:bg-glow/10 border border-gray-500 glow:border-glow rounded-md'}>
+                                  <Image src={item.icon} width={45} height={45} alt={item.name}/>
+                                </div>
+                              </Glow>
+                            </Tooltip>
+                        ))
+                      }
+                    </div>
+                  </GlowCapture>
+
+                </div>
               </div>
             </div>
             <GlowCapture>
+              <div className={"flex justify-center w-full p-8"}>
+                <Glow color="purple">
+                  <div className={"glow:text-glow text-4xl text-blue-600"}>
+                    Zone under construction
+                  </div>
+                </Glow>
+              </div>
 
-            <div className="flex gap-4">
-              {list.map((item, index) => (
-                    <Glow color={"purple"}>
-                      <Card shadow="sm" key={index} isPressable onPress={() => console.log('item pressed')} className={"glow:bg-glow/20 glow:border-glow"}>
-                        <CardBody className="overflow-visible p-0">
-                          <Image
-                              shadow="sm"
-                              radius="lg"
-                              width="100%"
-                              alt={item.title}
-                              className="w-full object-cover h-[140px]"
-                              src={item.img}
-                          />
-                        </CardBody>
-                        <CardFooter className="text-small justify-between">
-                          <b>{item.title}</b>
-                          <p className="text-default-500">{item.price}</p>
+              <div className="hidden flex gap-4">
+                {projects.map((item, index) => (
+                    <Glow color={item.color}>
+                      <Card className="w-[400px] glow:bg-glow/10 border border-gray-500 glow:border-glow pt-5">
+                        <div>
+                          <h3 className="text-lg font-bold">{item.title}</h3>
+                          <p className="text-sm">{item.description}</p>
+                        </div>
+
+                        <CardFooter className="text-small w-full">
+                          <Link href={'/projects/' + item.id} className={'w-full'}>
+                            <Button fullWidth color="primary" variant="flat" radius="full">
+                              Go to {item.title}
+                            </Button>
+                          </Link>
                         </CardFooter>
                       </Card>
+
                     </Glow>
-
-
-              ))}
-            </div>
+                ))}
+              </div>
             </GlowCapture>
           </div>
         </div>

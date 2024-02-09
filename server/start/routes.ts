@@ -10,6 +10,7 @@
 import router from '@adonisjs/core/services/router'
 import AuthController from '#controllers/auth_controller'
 import ProjectsController from '#controllers/projects_controller'
+import { middleware } from '#start/kernel'
 
 router.get('/', async () => {
   return {
@@ -20,7 +21,11 @@ router.get('/', async () => {
 router.group(() => {
 
   router.group(() => {
-    router.get('/', [ProjectsController, "index"])
+    router.get('/:isPublished', [ProjectsController, "index"])
+    router.get('/:id', [ProjectsController, "show"])
+    router.post('/', [ProjectsController, "store"]).use(middleware.auth())
+    router.put('/:id', [ProjectsController, "update"]).use(middleware.auth())
+    router.delete('/:id', [ProjectsController, "destroy"]).use(middleware.auth())
 
   }).prefix('/projects')
   // projects routes

@@ -7,7 +7,7 @@ export interface User {
   role: string
   created_at: string
   updated_at: string,
-  isAdmin: boolean,
+  is_admin: boolean,
   isConnected: boolean,
   error: AxiosError | null
 }
@@ -20,7 +20,7 @@ export function getNulledUser(): User {
     role: '',
     created_at: '',
     updated_at: '',
-    isAdmin: false,
+    is_admin: false,
     isConnected: false,
     error: null
   }

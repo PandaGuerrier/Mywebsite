@@ -1,7 +1,10 @@
 import { motion } from 'framer-motion'
 import React from 'react'
 
-export default function LogoAnimated() {
+interface Props {
+  className?: string
+}
+export default function LogoAnimated({ className }: Props) {
 
   function icon(color: string) {
     return {
@@ -19,7 +22,7 @@ export default function LogoAnimated() {
   }
 
   return (
-      <svg width="500" height="500" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg width="500" height="500" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg" className={className}>
         <motion.path
             d="M403.718 96.255L403.745 313.685L331.265 241.19V168.708L258.81 168.735L186.33 96.255H403.718Z"
             variants={icon('#3b82f6')}
