@@ -11,6 +11,7 @@ import router from '@adonisjs/core/services/router'
 import AuthController from '#controllers/auth_controller'
 import ProjectsController from '#controllers/projects_controller'
 import { middleware } from '#start/kernel'
+import ContactsController from '#controllers/contacts_controller'
 
 router.get('/', async () => {
   return {
@@ -28,6 +29,8 @@ router.group(() => {
     router.delete('/:id', [ProjectsController, "destroy"]).use(middleware.auth())
 
   }).prefix('/projects')
+
+  router.post('/contact', [ContactsController, "create"])
   // projects routes
 }).prefix('/api/v1')
 

@@ -32,6 +32,7 @@ const HomeLayout = ({children}: {
                   outerAlpha={0.2}
                   innerScale={0.7}
                   outerScale={5}
+
                   clickables={[
                     'a',
                     'input[type="text"]',
@@ -77,7 +78,9 @@ const HomeLayout = ({children}: {
                 ) : (
                     <div className="flex justify-center items-center h-full bg-black">
                       <div className="flex-row justify-center items-center text-center">
-                        <LogoAnimated/>
+                        <div className="w-full h-full flex items-center justify-center">
+                          <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-blue-400"/>
+                        </div>
                       </div>
                     </div>
                 )

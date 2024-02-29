@@ -13,9 +13,11 @@ export async function getProjects(all = false) {
     const payload = response.data
 
     const projects = payload.projects as Project[]
+    console.log(projects)
     return projects.reverse()
   } catch (e) {
     const error = e as AxiosError
     toast.error('Error while fetching projects')
+    return []
   }
 }

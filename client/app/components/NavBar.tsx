@@ -54,7 +54,7 @@ export default function NavBar() {
   }
 
   return (
-      <Navbar onMenuOpenChange={setIsMenuOpen} isBordered className="fixed ">
+      <Navbar onMenuOpenChange={setIsMenuOpen} isBordered className="fixed" shouldHideOnScroll>
         <NavbarContent>
           <NavbarMenuToggle
               aria-label={isMenuOpen ? "Close menu" : "Open menu"}
@@ -111,7 +111,6 @@ export default function NavBar() {
             <AuthModal selectedStr="login" />
           </>
           }
-          <ThemeComponent />
 
         </NavbarContent>
         <NavbarMenu>
