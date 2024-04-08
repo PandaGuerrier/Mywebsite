@@ -1,14 +1,11 @@
 'use client'
 
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { NextUIProvider } from '@nextui-org/react'
 import { AnimatePresence, motion } from 'framer-motion'
 import LogoAnimated from '@/app/components/animations/LogoAnimated'
-import { UserContext, UserProvider } from '@/app/hooks/useUser'
+import { UserProvider } from '@/app/hooks/useUser'
 import { ThemeProvider } from '@/app/hooks/useTheme'
-import AnimatedCursor from 'react-animated-cursor'
-import { toast } from 'sonner'
-import { getClientSession } from '@/functions/getClientSession/getClientSession'
 
 const DashLayout = ({children}: {
   children: React.ReactNode
@@ -22,7 +19,7 @@ const DashLayout = ({children}: {
   }, [])
 
   return (
-      <NextUIProvider className="w-full h-full text-foreground bg-transparent">
+      <NextUIProvider className="w-full h-full text-foreground bg-transparent cursor-default">
         <AnimatePresence mode="popLayout" initial={isLoad}>
           <ThemeProvider>
             <UserProvider>

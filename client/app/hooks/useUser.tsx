@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useContext, useEffect, useState } from 'react'
+import { createContext, ReactNode, useEffect, useState } from 'react'
 import { getNulledUser, User } from '@/types/User'
 import { getClientSession } from '@/functions/getClientSession/getClientSession'
 

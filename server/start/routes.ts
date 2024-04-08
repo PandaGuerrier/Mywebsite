@@ -23,7 +23,7 @@ router.group(() => {
 
   router.group(() => {
     router.get('/:isPublished', [ProjectsController, "index"])
-    router.get('/:id', [ProjectsController, "show"])
+    router.get('/show/:id', [ProjectsController, "show"])
     router.post('/', [ProjectsController, "store"]).use(middleware.auth())
     router.put('/:id', [ProjectsController, "update"]).use(middleware.auth())
     router.delete('/:id', [ProjectsController, "destroy"]).use(middleware.auth())

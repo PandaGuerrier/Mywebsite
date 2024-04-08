@@ -1,13 +1,8 @@
 'use client'
-import React, { useEffect } from 'react'
-import AnnounceComponent from '@/app/components/AnnounceComponent'
-import Spline from '@splinetool/react-spline'
-import BlurBallComponent from '@/app/components/BlurBall'
-import { Button, Card, CardBody, Link, Image } from '@nextui-org/react'
+import React from 'react'
+import { Button, Card, Link } from '@nextui-org/react'
 import { Glow, GlowCapture } from '@codaworks/react-glow'
 import { CardFooter } from '@nextui-org/card'
-import { getProjects } from '@/functions/getProjects/getProjects'
-import { Project } from '@/types/Project'
 
 export default function Dashboard() {
   const links = [
@@ -41,7 +36,7 @@ export default function Dashboard() {
         <GlowCapture>
           <div className="grid grid-cols-3 gap-7 text-center">
             {links.map((item, index) => (
-                <Glow color={"purple"}>
+                <Glow color={"purple"} key={index}>
                   <Card className="w-[400px] glow:bg-glow/10 border border-gray-500 glow:border-glow pt-5">
                     <div>
                       <h3 className="text-lg font-bold">{item.name}</h3>
@@ -61,8 +56,6 @@ export default function Dashboard() {
                     }
                   </Card>
                 </Glow>
-
-
             ))}
           </div>
         </GlowCapture>

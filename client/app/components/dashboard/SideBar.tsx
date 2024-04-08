@@ -88,7 +88,7 @@ export default function SideBar({ children }: { children: ReactNode }) {
               </div>
           </div>
         <div className={"w-full h-screen overflow-auto"}>
-          <div className={"fixed border border-transparent border-b-gray-500 p-4 w-full"}>
+          <div className={"border border-transparent border-b-gray-500 p-4 w-full bg-black"}>
             <h1 className={"text-2xl text-center"}>Bienvenue sur ton dashboard ma couille, {user.username}</h1>
             <div className={"md:hidden w-full h-[50px] bg-gray-950 mb-5 p-4"}>
               <Button fullWidth onClick={() => setOpen(!isOpen)}>Open nav</Button>

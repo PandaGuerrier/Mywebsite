@@ -15,9 +15,8 @@ import {
   NavbarMenuToggle
 } from '@nextui-org/react'
 import AuthModal from '@/app/components/auth/AuthModal'
-import ThemeComponent from '@/app/components/ThemeComponent'
 import { deleteClientSession } from '@/functions/deleteClientSession/deleteClientSession'
-import { getNulledUser, User } from '@/types/User'
+import { getNulledUser } from '@/types/User'
 import { UserContext } from '@/app/hooks/useUser'
 
 export default function NavBar() {
@@ -28,15 +27,15 @@ export default function NavBar() {
   const links = [
     {
       name: "Home",
-      link: "/",
+      link: "#",
     },
     {
       name: "About me",
       link: "#about"
     },
     {
-      name: "Creations",
-      link: "#creations"
+      name: "Projects",
+      link: "#projects"
     },
     {
       name: "Contact",
@@ -54,7 +53,7 @@ export default function NavBar() {
   }
 
   return (
-      <Navbar onMenuOpenChange={setIsMenuOpen} isBordered className="fixed" shouldHideOnScroll>
+      <Navbar onMenuOpenChange={setIsMenuOpen} isBordered className="fixed cursor-default" shouldHideOnScroll>
         <NavbarContent>
           <NavbarMenuToggle
               aria-label={isMenuOpen ? "Close menu" : "Open menu"}

@@ -61,37 +61,44 @@ export default function AboutMe() {
     {
       title: 'About me',
       description: (
-          <div className={'text-md md:text-lg'}>
-            <p>
-              Hey, my name is Jules, I am a {age} years old french developer. I am passionate about programming and I am
-              always looking for new challenges.
-            </p>
-            <p>
-              It all started when I was 12 years old, I discovered the world of programming and I immediately fell in
-              love with it. I started with Javascript and then I discovered the world of web development with Java,
-              Dart, etc..
-            </p>
-            <p>
-              I am currently studying at a high school in France, and here my goal is to become a software engineer. I
-              am also a freelancer and I am always looking for new projects to work on.
-            </p>
-            <p className={'mt-5'}>
-              Here what are my stacks:
+          <div>
+            <Image
+              src="https://conodia.fr/storage/img/me.png"
+              className={"md:float-left rounded-lg mr-5"}
+            />
 
-              <div className="flex flex-row items-center justify-center my-10 w-full space-x-5">
-                <AnimatedTooltip items={technos}/>
-              </div>
-            </p>
-            <Link href={'#contact'} target={"_blank"} className={"w-full"}>
-              <Button fullWidth variant={'flat'} color={'primary'} radius="full" className={'mt-5'}>
-                Contact me
-              </Button>
-            </Link>
+            <div className={'text-md md:text-lg mt-5 space-y-2'}>
+              <p>
+                Hey, my name is <span className={"bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent"}>Jules</span>, I am a {age} years old french developer. I am passionate about programming and I
+                am   always looking for new challenges.
+              </p>
+              <p>
+                It all started when I was 12 years old, I discovered the world of programming and I immediately fell in
+                love with it. I started with Javascript, with create Discord bot, and then I discovered the world of development with Java,
+                Dart, etc..
+
+                I love to create new things, I'm currently working on a minecraft server called Conodia, and I'm also in a Discord's bot framework project called <Link href={"https://discord.gg/M2cSPjK4SG"} target={"_blank"}>Mineral</Link>.
+              </p>
+              <p>
+                I am currently studying at a high school in France, and here my goal is to become a software engineer. I
+                am also a freelancer and I am always looking for new projects to work on.
+              </p>
+              <p className={'mt-5'}>
+                Here what are my lovelies stacks:
+
+                <div className="flex flex-row items-center justify-center my-10 w-full space-x-5">
+                  <AnimatedTooltip items={technos}/>
+                </div>
+              </p>
+              <Link href={'#contact'} target={'_blank'} className={'w-full'}>
+                <Button fullWidth variant={'flat'} color={'primary'} radius="full" className={'mt-5'}>
+                  Contact me
+                </Button>
+              </Link>
+            </div>
           </div>
       ),
-      badge: 'Developper',
-      image:
-          'https://conodia.fr/storage/img/me.png'
+      badge: 'Developper'
     },
     {
       title: 'Conodia',
@@ -103,7 +110,7 @@ export default function AboutMe() {
               It's a project that I started in 2021 and I am still working on it, I want to be a famous minecraft server
               but the minecraft community is going to die, so we had a big change: be a modded minecraft server.
             </p>
-            <Link href={'https://discord.gg/conodia'} target={"_blank"} className={"w-full"}>
+            <Link href={'https://discord.gg/conodia'} target={'_blank'} className={'w-full'}>
               <Button fullWidth variant={'flat'} color={'primary'} radius="full" className={'mt-5'}>
                 Join us
               </Button>
@@ -117,36 +124,36 @@ export default function AboutMe() {
   ]
 
   return (
-    <div>
-      <TracingBeam className="px-6">
-        <div className="max-w-2xl mx-auto antialiased pt-4 relative">
-          {dummyContent.map((item, index) => (
-              <div key={`content-${index}`} className="mb-10">
-                <h2 className="bg-black text-white rounded-full text-sm w-fit px-4 py-1 mb-4">
-                  {item.badge}
-                </h2>
+      <div>
+        <TracingBeam className="px-6">
+          <div className="max-w-2xl mx-auto antialiased pt-4 relative">
+            {dummyContent.map((item, index) => (
+                <div key={`content-${index}`} className="mb-10">
+                  <h2 className="bg-black text-white rounded-full text-sm w-fit px-4 py-1 mb-4">
+                    {item.badge}
+                  </h2>
 
-                <p className={'text-xl mb-4'}>
-                  {item.title}
-                </p>
+                  <p className={'text-xl mb-4'}>
+                    {item.title}
+                  </p>
 
-                <div className="text-sm  prose prose-sm dark:prose-invert">
-                  {item?.image && (
-                      <Image
-                          src={item.image}
-                          alt="blog thumbnail"
-                          height="1000"
-                          width="1000"
-                          className="rounded-lg mb-10 object-cover"
-                      />
-                  )}
-                  {item.description}
+                  <div className="text-sm  prose prose-sm dark:prose-invert">
+                    {item?.image && (
+                        <Image
+                            src={item.image}
+                            alt="blog thumbnail"
+                            height="1000"
+                            width="1000"
+                            className="rounded-lg mb-10 object-cover"
+                        />
+                    )}
+                    {item.description}
+                  </div>
                 </div>
-              </div>
-          ))}
-        </div>
-      </TracingBeam>
-    </div>
+            ))}
+          </div>
+        </TracingBeam>
+      </div>
 
   )
 }

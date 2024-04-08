@@ -1,13 +1,7 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
-import {
-  motion,
-  useTransform,
-  useScroll,
-  useVelocity,
-  useSpring,
-} from "framer-motion";
-import { cn } from "@/utils/cn";
+import React, { useEffect, useRef, useState } from 'react'
+import { motion, useScroll, useSpring, useTransform, useVelocity } from 'framer-motion'
+import { cn } from '@/utils/cn'
 
 export const TracingBeam = ({
                               children,
@@ -24,7 +18,7 @@ export const TracingBeam = ({
 
   // track velocity of scroll to increase or decrease distance between svg gradient y coordinates.
   const scrollYProgressVelocity = useVelocity(scrollYProgress);
-  const [velo, setVelocity] = React.useState(0);
+  const [setVelocity] = React.useState(0);
 
   const contentRef = useRef<HTMLDivElement>(null);
 
@@ -37,6 +31,7 @@ export const TracingBeam = ({
   }, []);
   useEffect(() => {
     return scrollYProgressVelocity.onChange((latestVelocity) => {
+      // @ts-ignore
       setVelocity(latestVelocity);
     });
   }, []);

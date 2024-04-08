@@ -2,16 +2,15 @@ import React, { useContext, useState } from 'react'
 import api from '@/services/api'
 import { ModalBody, ModalFooter, ModalHeader } from '@nextui-org/modal'
 import AlertComponent from '@/app/components/AlertComponent'
-import { Checkbox, Input, Link } from '@nextui-org/react'
+import { Checkbox, Input } from '@nextui-org/react'
 import { Button } from '@nextui-org/button'
-import { User } from '@/types/User'
 import { toast } from 'sonner'
 import { UserContext } from '@/app/hooks/useUser'
 
 export default function LoginForm() {
   const [error, setError] = useState<string | null>(null)
   const [rememberMe, setRememberMe] = React.useState(false)
-  const { user, setUser } = useContext(UserContext)
+  const { setUser } = useContext(UserContext)
 
   const login = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()

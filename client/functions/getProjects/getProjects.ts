@@ -1,11 +1,7 @@
-import api from "@/services/api"
-import { AxiosError } from "axios"
+import api from '@/services/api'
+import { AxiosError } from 'axios'
 import { toast } from 'sonner'
 import { Project } from '@/types/Project'
-
-interface Props {
-  all: boolean
-}
 
 export async function getProjects(all = false) {
   try {
@@ -16,7 +12,6 @@ export async function getProjects(all = false) {
     console.log(projects)
     return projects.reverse()
   } catch (e) {
-    const error = e as AxiosError
     toast.error('Error while fetching projects')
     return []
   }

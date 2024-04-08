@@ -1,16 +1,18 @@
 'use client'
 
-import React, {useContext, useState} from 'react'
+import React, { useContext, useMemo, useState } from 'react'
 import api from '@/services/api'
-import {Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure} from '@nextui-org/modal'
-import { Input, Select, SelectItem } from '@nextui-org/react'
-import {Button} from '@nextui-org/button'
-import {toast} from 'sonner'
-import {UserContext} from '@/app/hooks/useUser'
+import { Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure } from '@nextui-org/modal'
+import { Input } from '@nextui-org/react'
+import { Button } from '@nextui-org/button'
+import { toast } from 'sonner'
+import { UserContext } from '@/app/hooks/useUser'
 import { TagsInput } from 'react-tag-input-component'
-import { useQuill } from 'react-quilljs'
 import { PlusIcon } from 'lucide-react'
 import { getProjects } from '@/functions/getProjects/getProjects'
+import 'react-quill/dist/quill.snow.css'
+import { Switch } from '@nextui-org/switch'
+import dynamic from 'next/dynamic'
 
 export type Errors = {
   [key: string]: {
@@ -25,30 +27,18 @@ interface Props {
 }
 
 export default function CreateProjectModal({ projects, setProjects }: Props) {
+  const ReactQuill = useMemo(
+      () => dynamic(() => import("react-quill"), { ssr: false }),
+      []
+  );
   const [errors, setErrors] = useState({} as Errors)
   const {isOpen, onOpen, onOpenChange, onClose} = useDisclosure()
   const {user} = useContext(UserContext)
   const [tags, setTags] = useState([] as string[])
-  const [color, setColor] = useState('blue' as string)
   const [text, setText] = useState('' as string)
   const [isPublished, setIsPublished] = useState(false)
-  const [isPin, setIsPin] = useState(false)
-  const { quill, quillRef } = useQuill({
-    theme: 'snow',
-    placeholder: 'Write something awesome...',
+  const [image, setImage] = useState<string | null>(null)
 
-  })
-
-  const colors = [
-    "purple",
-    "blue",
-    "green",
-    "yellow",
-    "orange",
-    "red",
-    "pink",
-    "indigo",
-  ]
 
   function sortErrors(errors: any) {
     const errorsSorted = {}
@@ -74,12 +64,10 @@ export default function CreateProjectModal({ projects, setProjects }: Props) {
         title: event.currentTarget.title.value,
         description: event.currentTarget.description.value,
         tags: tags,
-        color: color,
         userId: user.id,
-        text: quill?.root.innerHTML,
-        image: null,
+        text: text,
+        image: image,
         isPublished: isPublished,
-        isPin: isPin
       })
       const projectsNew = await getProjects()
 
@@ -137,18 +125,6 @@ export default function CreateProjectModal({ projects, setProjects }: Props) {
                 />
 
                 <div className="flex space-x-4">
-                  <Select
-                    items={colors}
-                    label="Color for background"
-                    placeholder="Select an color"
-                    className="max-w-xs"
-                    color={errors.color ? 'danger' : 'default'}
-                    errorMessage={errors.color?.message}
-                    required
-                  >
-                    {colors.map((color, index) => <SelectItem onClick={() => setColor(color)}
-                                                              key={index}>{color}</SelectItem>)}
-                  </Select>
                   <div>
                     <TagsInput
                       value={tags}
@@ -164,7 +140,31 @@ export default function CreateProjectModal({ projects, setProjects }: Props) {
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700">Content</label>
-                  <div ref={quillRef} />
+                  <ReactQuill theme="snow" value={text} onChange={setText}/>
+                </div>
+                <div>
+                  <Switch isSelected={isPublished} onValueChange={setIsPublished}>
+                    Publié
+                  </Switch>
+                </div>
+                <div className={"my-4 space-y-5"}>
+                  <Input
+                      autoFocus
+                      name="image"
+                      onChange={(e) => setImage(e.target.value)}
+                      label="Image"
+                      placeholder="Enter the project's image"
+                      variant="bordered"
+                      value={image || ''}
+                      color={errors.image ? 'danger' : 'primary'}
+                      errorMessage={errors.image?.message}
+                      required
+                  />
+                  <div className={"flex justify-center mb-5"}>
+                    {
+                        image && <img src={image} alt="image" className="w-1/2"/>
+                    }
+                  </div>
                 </div>
 
               </ModalBody>

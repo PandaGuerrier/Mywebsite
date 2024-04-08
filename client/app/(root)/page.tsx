@@ -10,12 +10,18 @@ import Footer from '@/app/components/page/Footer'
 export default function Home() {
   return (
       <>
-        <div className="absolute inset-0 h-full w-full bg-white dark:bg-black ">
+        <div className="absolute inset-0 h-full w-full bg-black cursor-default ">
           <HeroComponent/>
           <TestimonialsComponent/>
-          <AboutMe/>
-          <Projects />
-          <ContactForm />
+          <div id={"about"}>
+            <AboutMe/>
+          </div>
+          <div id={"projects"}>
+            <Projects />
+          </div>
+          <div id={"contact"}>
+            <ContactForm />
+          </div>
           <Footer />
         </div>
       </>

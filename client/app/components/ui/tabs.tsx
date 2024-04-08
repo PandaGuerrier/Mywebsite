@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import { cn } from "@/utils/cn";
+import { useState } from 'react'
+import { motion } from 'framer-motion'
+import { cn } from '@/utils/cn'
 
 type Tab = {
   title: string;
@@ -16,12 +16,15 @@ export const Tabs = ({
                        activeTabClassName,
                        tabClassName,
                        contentClassName,
+                       forwardedRef,
+
                      }: {
   tabs: Tab[];
   containerClassName?: string;
   activeTabClassName?: string;
   tabClassName?: string;
   contentClassName?: string;
+  forwardedRef?: any;
 }) => {
   const [active, setActive] = useState<Tab>(propTabs[0]);
   const [tabs, setTabs] = useState<Tab[]>(propTabs);
@@ -39,8 +42,9 @@ export const Tabs = ({
   return (
       <>
         <div
+            ref={forwardedRef}
             className={cn(
-                "flex flex-row items-center justify-start [perspective:1000px] relative overflow-auto sm:overflow-visible no-visible-scrollbar max-w-full w-full",
+                "flex flex-row items-center justify-center md:justify-start [perspective:1000px] relative overflow-auto sm:overflow-visible no-visible-scrollbar md:max-w-full w-full",
                 containerClassName
             )}
         >
@@ -114,7 +118,7 @@ export const FadeInDiv = ({
                 animate={{
                   y: isActive(tab) ? [0, 40, 0] : 0,
                 }}
-                className={isActive(tab) ? cn("w-full h-full absolute top-0 left-0 ", className) : "invisible"}
+                className={isActive(tab) ? cn("w-full top-0 left-0 ", className) : "invisible absolute top-0 left-0"}
             >
               {tab.content}
             </motion.div>

@@ -1,6 +1,6 @@
-import api from "@/services/api"
+import api from '@/services/api'
 import { getNulledUser, User } from '@/types/User'
-import { AxiosError } from "axios"
+import { AxiosError } from 'axios'
 import { toast } from 'sonner'
 
 export async function getClientSession(): Promise<User> {

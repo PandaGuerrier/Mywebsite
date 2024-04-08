@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from 'react'
+import { createContext, useEffect, useState } from 'react'
 import { toast } from 'sonner'
 
 export type Theme = 'dark' | 'light'
@@ -15,7 +15,7 @@ export function ThemeProvider({children}: {
 
   useEffect(() => {
     const localTheme = window.localStorage.getItem('theme')
-    setTheme(localTheme as Theme || 'dark')
+    setTheme('dark')
 
     console.log( "theme : " + theme)
     if (theme === 'dark') {

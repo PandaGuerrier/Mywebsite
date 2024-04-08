@@ -27,7 +27,10 @@ export default class ProjectsController {
 
   public async store({ request, response }: HttpContext) {
     const data = await request.validateUsing(createProjectValidator)
-    const project = await Project.create(data)
+    const project = await Project.create({
+      ...data,
+      tags: JSON.stringify(data.tags)
+    })
     return response.json({
       project: project
     })
@@ -35,7 +38,10 @@ export default class ProjectsController {
 
   public async update({ request, response, params }: HttpContext) {
     const data = await request.validateUsing(createProjectValidator)
-    const project = await Project.query().where('id', params.id).update(data)
+    const project = await Project.query().where('id', params.id).update({
+      ...data,
+      tags: JSON.stringify(data.tags)
+    })
     return response.json({
       project: project
     })

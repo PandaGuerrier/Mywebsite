@@ -8,12 +8,7 @@ export interface Project {
   user_id: string
   text: string
   is_published: boolean
-  image: Image | null
+  image: string | null
   tags: string[]
   is_pin: boolean
-}
-
-export interface Image {
-  link: string
-  name: string
 }

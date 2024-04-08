@@ -1,6 +1,5 @@
-import api from "@/services/api"
-import { User } from "@/types/User"
-import { AxiosError } from "axios"
+import api from '@/services/api'
+import { AxiosError } from 'axios'
 import { toast } from 'sonner'
 
 export async function deleteClientSession(): Promise<void> {
@@ -11,6 +10,6 @@ export async function deleteClientSession(): Promise<void> {
       duration: 5000,
     })
   } catch (e) {
-    const error = e as AxiosError
+    toast.error('Error while logging out')
   }
 }

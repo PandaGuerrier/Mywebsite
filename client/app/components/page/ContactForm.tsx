@@ -1,9 +1,7 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { MovingBorderButton } from '@/app/components/ui/moving-border'
 import { Meteors } from '@/app/components/ui/meteors'
-import { Checkbox, Input } from '@nextui-org/react'
-import { Boxes } from 'lucide-react'
-import { cn } from '@/utils/cn'
+import { Input } from '@nextui-org/react'
 import { Textarea } from '@nextui-org/input'
 import api from '@/services/api'
 import { toast } from 'sonner'
@@ -11,6 +9,7 @@ import { Errors } from '@/app/components/auth/RegisterForm'
 
 export default function ContactForm() {
   const [errors, setErrors] = useState({} as Errors)
+  const [cooldown, setCooldown] = useState(0)
 
   function sortErrors(errors: any) {
     const errorsSorted = {}
@@ -26,10 +25,20 @@ export default function ContactForm() {
     setErrors(errorsSorted)
   }
 
+  useEffect(() => {
+    if (cooldown > 0) {
+      const interval = setInterval(() => {
+        setCooldown(cooldown - 1)
+      }, 1000)
+      return () => clearInterval(interval)
+    }
+  }, [cooldown])
+
   const login = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
+    setCooldown(3)
     try {
-      const response = await api.post('api/v1/contact/', {
+      await api.post('api/v1/contact/', {
         email: event.currentTarget.email.value,
         // @ts-ignore
         name: event.currentTarget.name.value,
@@ -38,12 +47,16 @@ export default function ContactForm() {
       })
 
 
+
       toast.success("Your contact request has been sent !", {
         position: "top-center",
         duration: 5000,
       })
+      // @ts-ignore
+      document.getElementById('contact-form')?.reset()
       setErrors({} as Errors)
     }  catch (e: any) {
+      console.log(e)
       sortErrors(e.response.data.errors)
 
       return;
@@ -60,7 +73,7 @@ export default function ContactForm() {
                 Contact Me
               </h1>
 
-              <form onSubmit={login} className={"w-full space-y-5"}>
+              <form onSubmit={login} id={"contact-form"} className={"w-full space-y-5"}>
 
                 <div className={"w-full flex space-x-3"}>
                   <Input
@@ -109,8 +122,12 @@ export default function ContactForm() {
                     fullWidth
                 />
 
-                <MovingBorderButton duration={5000} containerClassName={"h-[50px] w-full"}>
-                  <h1 className="text-black dark:text-white md:text-base text-sm">Send</h1>
+                <MovingBorderButton duration={5000} containerClassName={"h-[50px] w-full"} disabled={cooldown != 0}>
+                  <h1 className="text-black dark:text-white md:text-base text-sm">
+                    {
+                      cooldown > 0 ? `Wait ${cooldown}s before resend` : "Send Message"
+                    }
+                  </h1>
                 </MovingBorderButton>
               </form>
 

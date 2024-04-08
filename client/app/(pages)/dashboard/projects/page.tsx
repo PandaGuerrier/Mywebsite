@@ -2,33 +2,32 @@
 
 import React, { useEffect, useState } from 'react'
 import {
-  Table,
-  TableHeader,
-  TableColumn,
-  TableBody,
-  TableRow,
-  TableCell,
-  Input,
   Button,
-  DropdownTrigger,
-  Dropdown,
-  DropdownMenu,
-  DropdownItem,
   Chip,
+  ChipProps,
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
+  Input,
+  Link,
   Pagination,
   Selection,
-  ChipProps,
-  SortDescriptor
+  SortDescriptor,
+  Table,
+  TableBody,
+  TableCell,
+  TableColumn,
+  TableHeader,
+  TableRow
 } from '@nextui-org/react'
 import { columns, statusOptions } from './data'
 import { VerticalDotsIcon } from '@/app/components/icons/VerticalDotsIcon'
-import { ChevronDownIcon, PlusIcon, SearchIcon } from 'lucide-react'
+import { ChevronDownIcon, SearchIcon } from 'lucide-react'
 import { capitalize } from 'lodash-es'
 import { Project } from '@/types/Project'
 import { getProjects } from '@/functions/getProjects/getProjects'
 import CreateProjectModal from '@/app/components/dashboard/project/CreateProjectModal'
-import UpdateProjectModal from '@/app/components/dashboard/project/UpdateProjectModal'
-import { useDisclosure } from '@nextui-org/modal'
 import api from '@/services/api'
 
 const statusColorMap: Record<string, ChipProps['color']> = {
@@ -60,7 +59,7 @@ export default function App() {
 
   async function handleDelete(project: Project) {
     await api.delete(`api/v1/projects/${project.id}`)
-    const newProjects = await getProjects()
+    const newProjects = await getProjects(true)
     setProjects(newProjects as Project[])
   }
 
@@ -142,7 +141,11 @@ export default function App() {
                   </Button>
                 </DropdownTrigger>
                 <DropdownMenu>
-                  <DropdownItem>test {project.title}</DropdownItem>
+                  <DropdownItem>
+                    <Link href={`/dashboard/projects/${project.id}`}>
+                      Edit
+                    </Link>
+                  </DropdownItem>
                   <DropdownItem onClick={() => handleDelete(project)}>Delete</DropdownItem>
                 </DropdownMenu>
               </Dropdown>

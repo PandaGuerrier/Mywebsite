@@ -30,13 +30,13 @@ export default function HeroComponent() {
             </div>
 
             <div className={'mt-52 space-x-5'}>
-              <Link href={'#creations'}>
+              <Link href={'#about'}>
                 <Button variant={'flat'} color={'primary'} radius="full">
                   Show more
                 </Button>
               </Link>
 
-              <Link href={'#creations'}>
+              <Link href={'#contact'}>
                 <Button variant={'ghost'} color={'primary'} radius="full">
                   Contact me
                 </Button>

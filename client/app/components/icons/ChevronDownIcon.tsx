@@ -1,5 +1,6 @@
-import React from "react";
+import React from 'react'
 import { IconSvgProps } from '@/app/components/icons/PlusIcon'
+
 export const ChevronDownIcon = ({strokeWidth = 1.5, ...otherProps}: IconSvgProps) => (
     <svg
         aria-hidden="true"

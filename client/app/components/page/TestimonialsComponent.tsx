@@ -1,8 +1,27 @@
-
 import React from 'react'
 import { InfiniteMovingCards } from '@/app/components/ui/infinite-moving-cards'
+import { TypewriterEffectSmooth } from '@/app/components/ui/typewriter-effect'
 
 export default function TestimonialsComponent() {
+
+  const words = [
+    {
+      text: "What",
+    },
+    {
+      text: "my",
+    },
+    {
+      text: "50",
+      className: "text-blue-500 dark:text-blue-500",
+    },
+    {
+      text: "customers",
+    },
+    {
+      text: "say.",
+    },
+  ];
 
   const testimonials = [
     {
@@ -45,9 +64,9 @@ export default function TestimonialsComponent() {
   return (
       <>
         <div
-            className="h-[40rem] rounded-md flex flex-col antialiased bg-white dark:bg-black dark:bg-grid-white/[0.05] items-center justify-center relative overflow-hidden">
+            className="h-[40rem] rounded-md flex flex-col antialiased bg-black items-center justify-center overflow-hidden">
             <span className={'font-bold text-md'}>
-              What my customers say
+                    <TypewriterEffectSmooth words={words} />
             </span>
           <InfiniteMovingCards
               items={testimonials}

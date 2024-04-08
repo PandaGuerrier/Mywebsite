@@ -21,16 +21,10 @@ export default class Project extends BaseModel {
   declare isPublished: boolean
 
   @column()
-  declare color: string
-
-  @column()
-  declare isPin: boolean
-
-  @column()
   declare userId: number
 
   @column()
-  declare tags: string[]
+  declare tags: string
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
