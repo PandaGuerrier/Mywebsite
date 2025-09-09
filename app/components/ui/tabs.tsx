@@ -66,7 +66,7 @@ export const Tabs = ({
                         layoutId="clickedbutton"
                         transition={{ type: "spring", bounce: 0.3, duration: 0.6 }}
                         className={cn(
-                            "absolute inset-0 bg-gray-200 dark:bg-zinc-800 rounded-full ",
+                            "absolute inset-0 bg-blue-300 dark:bg-blue-500 rounded-full ",
                             activeTabClassName
                         )}
                     />

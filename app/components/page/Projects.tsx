@@ -178,7 +178,7 @@ export default function Projects() {
           value: tag,
           content: (
               <div
-                  className="w-full rounded-2xl py-10 md:px-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br bg-gray-800 bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-10 border border-gray-100 dark:from-gray-900 dark:to-slate-950 dark:border-transparent">
+                  className="w-full rounded-2xl py-10 md:px-10 text-xl md:text-4xl font-bold text-white bg-gradient-to-br bg-gray-800 bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-10 border border-gray-100 from-slate-100 to-slate-300 dark:from-gray-900 dark:to-slate-950 dark:border-transparent">
                 <p className={"text-center md:text-left text-black dark:text-white"}>{capitalizeFirstLetter(tag)} projects</p>
                 <div className={'grid md:grid-cols-2 gap-4 justify-center mt-5'}>
                   {projects.filter((project) => project.tags.includes(tag)).map((project) => (

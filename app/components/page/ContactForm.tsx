@@ -6,6 +6,7 @@ import {Textarea} from '@nextui-org/input'
 import api from '@/services/api'
 import {toast} from 'sonner'
 import Waves from '../ui/waves'
+import sendContactForm from '@/services/contact'
 
 export default function ContactForm() {
     const [errors, setErrors] = useState({} as { [key: string]: { field: string, message: string } })
@@ -42,40 +43,42 @@ export default function ContactForm() {
         const formData = new FormData(form);
         const newErrors: { [key: string]: { field: string, message: string } } = {};
 
-        // Vérifie chaque champ
-        // @ts-ignore
-        for (const [key, value] of formData.entries()) {
-            if (!value) {
-                newErrors[key] = {
-                    field: key,
-                    message: `${key.charAt(0).toUpperCase() + key.slice(1)} is required.`,
-                };
-            }
+      const entries = Array.from(formData.entries());
+      for (const [key, value] of entries) {
+        if (!value) {
+          newErrors[key] = {
+            field: key,
+            message: `${key.charAt(0).toUpperCase() + key.slice(1)} is required.`,
+          };
         }
-
-        // Si des erreurs sont trouvées, les afficher et arrêter l'exécution
+      }
         if (Object.keys(newErrors).length > 0) {
             setErrors(newErrors);
             return;
         }
 
         try {
-            const name = formData.get("name");
-            const email = formData.get("email");
-            const subject = formData.get("subject");
-            const message = formData.get("message");
+          const name = formData.get('name')! as string
+          const email = formData.get('email')! as string
+          const subject = formData.get('subject')! as string
+          const message = formData.get('message')! as string
 
+          const success = await sendContactForm(name, email, subject, message)
 
-            await api.post('', {
-                // @ts-ignore
-                content: "@everyone, someone has sent a contact request: \n\n" + "Name: " + event.currentTarget.name.value + "\nEmail: " + event.currentTarget.email.value + "\nSubject: " + event.currentTarget.subject.value + "\nMessage: " + event.currentTarget.message.value,
+          if (!success) {
+
+            toast.error("An error occurred while sending your contact request. Please try again later.", {
+              position: "top-center",
+              duration: 5000,
             })
-
+          } else {
 
             toast.success("Your contact request has been sent !", {
-                position: "top-center",
-                duration: 5000,
+              position: "top-center",
+              duration: 5000,
             })
+          }
+
             // @ts-ignore
             document.getElementById('contact-form')?.reset()
             setErrors({})
@@ -104,13 +107,13 @@ export default function ContactForm() {
                             maxCursorMove={120}
                             xGap={12}
                             yGap={36}
-                            className={'dark:opacity-80 opacity-10 absolute top-0 left-0 w-full h-full z-10 pointer-events-none'}
+                            className={'dark:opacity-80 opacity-10 absolute top-0 left-0 w-full h-full z-0 pointer-events-none'}
                         />
                         <h1 className="font-bold text-2xl text-black dark:text-white mb-4 relative z-50 text-center w-full">
                             Contact Me
                         </h1>
 
-                        <form onSubmit={sendContact} id={"contact-form"} className={"w-full space-y-5"}>
+                        <form onSubmit={sendContact} id={"contact-form"} className={"w-full space-y-5 relative z-10"}>
                             <div className={"w-full flex space-x-3"}>
                                 <Input
                                     label="Name"

@@ -94,22 +94,21 @@ export const InfiniteMovingCards = ({
                   className="w-[350px] max-w-full relative rounded-2xl border border-b-0 flex-shrink-0  dark:border-slate-700 px-8 py-6 md:w-[450px]"
                   key={item.name}
               >
-                <blockquote>
-                  <div>
+                <div>
                   <span className={'text-sm font-black dark:text-white'}>
                     {item.type}
                   </span>
-                  </div>
+                </div>
 
-                  <div
-                      aria-hidden="true"
-                      className="user-select-none -z-1 pointer-events-none absolute -left-0.5 -top-0.5 h-[calc(100%_+_4px)] w-[calc(100%_+_4px)]"
-                  ></div>
+                <div
+                    aria-hidden="true"
+                    className="user-select-none -z-1 pointer-events-none absolute -left-0.5 -top-0.5 h-[calc(100%_+_4px)] w-[calc(100%_+_4px)]"
+                ></div>
 
-                  <span className=" relative z-20 text-sm leading-[1.6] dark:text-gray-100 font-normal">
+                <span className=" relative z-20 text-sm leading-[1.6] dark:text-gray-100 font-normal">
                 {item.quote}
               </span>
-                  <div className="relative z-20 mt-6 flex flex-row items-center">
+                <div className="relative z-20 mt-6 flex flex-row items-center">
                 <span className="flex flex-col gap-1">
                   <span className=" text-sm leading-[1.6]  text-gray-600 dark:text-gray-400 font-normal">
                     {item.name}
@@ -118,8 +117,8 @@ export const InfiniteMovingCards = ({
                     {item.title}
                   </span>
                 </span>
-                  </div>
-                  <div className="relative z-20 mt-6 flex flex-row items-center">
+                </div>
+                <div className="relative z-20 mt-6 flex flex-row items-center">
                 <span className="flex flex-col gap-1 h-1/3">
                     <span className=" text-sm leading-[1.6] text-gray-400 font-normal">
                         {[...Array(item.rating)].map((_, i) => (
@@ -127,8 +126,7 @@ export const InfiniteMovingCards = ({
                         ))}
                     </span>
                 </span>
-                  </div>
-                </blockquote>
+                </div>
               </li>
           ))}
         </ul>
