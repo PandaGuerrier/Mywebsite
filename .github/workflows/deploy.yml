@@ -3,18 +3,19 @@ name: Deploy to Dokploy
 on:
   push:
     branches:
-      - main   # déclenche uniquement sur push main
+      - main   # Déclenche seulement sur la branche main
 
 jobs:
   deploy:
-    runs-on: self-hosted   # utilise ton runner tailnet
+    runs-on: self-hosted   # utilise ton runner sur le serveur Tailscale
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Trigger redeploy on Dokploy
+      - name: Trigger redeploy via Dokploy webhook
         run: |
-          curl -X POST \
-            -H "Authorization: Bearer ${{ secrets.DOKPLOY_API_KEY }}" \
+          echo "Triggering Dokploy redeploy..."
+          curl -k -X POST \
             -H "Content-Type: application/json" \
-            ${{ secrets.DOKPLOY_API_URL }}
+            -d '{"ref":"refs/heads/main"}' \
+            'https://pandaserv.tail07d637.ts.net/api/deploy/e47s6NC_7uzXHAXYa4I8Q'
