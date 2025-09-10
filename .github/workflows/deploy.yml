@@ -15,7 +15,12 @@ jobs:
       - name: Trigger redeploy via Dokploy webhook
         run: |
           echo "Triggering Dokploy redeploy..."
-          curl -k -X POST \
-            -H "Content-Type: application/json" \
-            -d '{"ref":"refs/heads/main","sha":"${GITHUB_SHA}"}' \
-            'https://pandaserv.tail07d637.ts.net/api/deploy/e47s6NC_7uzXHAXYa4I8Q'
+          curl -X 'POST' \
+            'https://pandaserv.tail07d637.ts.net/api/application.deploy' \
+            -H 'accept: application/json' \
+            -H 'Content-Type: application/json' \
+            -H 'x-api-key: {{ secrets.DOKPLY_API_KEY }}' \
+            -d '{
+            "applicationId": "Stx6jY_-ZAn6c_nfGaaTl"
+          }'
+          echo "Done!"
