@@ -123,6 +123,8 @@ export default function Projects() {
     })()
   }, [])
 
+  // test for ci/cd
+
   const tabs = [
     {
       title: 'All',
@@ -139,6 +141,7 @@ export default function Projects() {
                         project={project}
                     >
                       <div
+
                           className="flex flex-col p-4 tracking-tight text-slate-100/50 sm:basis-1/2 w-[20rem] min-h-[20rem]">
 
                         <div className="flex flex-1 w-full rounded-lg mt-4 max-w-xl">
