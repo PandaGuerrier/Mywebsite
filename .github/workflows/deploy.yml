@@ -15,7 +15,7 @@ jobs:
       - name: Trigger redeploy via Dokploy webhook
         run: |
           echo "Triggering Dokploy redeploy..."
-          echo "Longueur de la clé = ${#DOKPLOY_API_KEY}"
+          echo "Longueur de la clé = ${DOKPLOY_API_KEY}"
           curl -X 'POST' \
             'https://pandaserv.tail07d637.ts.net/api/application.deploy' \
             -H 'accept: application/json' \
