@@ -68,8 +68,8 @@ export const PinContainer = ({children, title, href, className, containerClassNa
             onOpenChange={onOpenChange}
             placement="auto"
             size="5xl"
-            className={"bg-transparent border border-transparent p-5"}
-            backdrop={'blur'}
+            className={"p-5 bg-transparent border-none shadow-none"}
+            backdrop="blur"
 
         >
           <ModalContent>

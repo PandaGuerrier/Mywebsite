@@ -152,7 +152,7 @@ export default function Projects() {
                               />
                           )}
                         </div>
-                        <h3 className="max-w-xs !pb-2 !m-0 font-bold  text-base text-slate-100">
+                        <h3 className="max-w-xs !pb-2 !m-0 font-bold  text-base text-blue-500">
                         {project.title}
                         </h3>
                         <div className="text-base !m-0 !p-0 font-normal">
@@ -201,7 +201,7 @@ export default function Projects() {
                                   />
                               )}
                             </div>
-                            <h3 className="max-w-xs !pb-2 !m-0 font-bold  text-base text-slate-800 dark:text-slate-100">
+                            <h3 className="max-w-xs !pb-2 !m-0 font-bold text-base text-blue-500">
                               {project.title}
                             </h3>
                             <div className="text-base !m-0 !p-0 font-normal">
