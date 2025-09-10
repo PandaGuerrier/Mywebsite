@@ -17,5 +17,5 @@ jobs:
           echo "Triggering Dokploy redeploy..."
           curl -k -X POST \
             -H "Content-Type: application/json" \
-            -d '{"ref":"refs/heads/main"}' \
+            -d '{"ref":"refs/heads/main","sha":"${GITHUB_SHA}"}' \
             'https://pandaserv.tail07d637.ts.net/api/deploy/e47s6NC_7uzXHAXYa4I8Q'
