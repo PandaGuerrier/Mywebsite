@@ -1,0 +1,20 @@
+name: Deploy to Dokploy
+
+on:
+  push:
+    branches:
+      - main   # déclenche uniquement sur push main
+
+jobs:
+  deploy:
+    runs-on: self-hosted   # utilise ton runner tailnet
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Trigger redeploy on Dokploy
+        run: |
+          curl -X POST \
+            -H "Authorization: Bearer ${{ secrets.DOKPLOY_API_KEY }}" \
+            -H "Content-Type: application/json" \
+            ${{ secrets.DOKPLOY_API_URL }}
