@@ -5,5 +5,5 @@ export default async function sendContactForm(name: string, email: string, subje
     content: "@everyone, someone has sent a contact request: \n\n" + "Name: " + name + "\nEmail: " + email + "\nSubject: " + subject + "\nMessage: " + message,
   })
 
-  return response.status === 200;
+  return response.status >= 200 && response.status < 300;
 }

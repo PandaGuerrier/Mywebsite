@@ -1,9 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import {MovingBorderButton} from '@/app/components/ui/moving-border'
-import {Meteors} from '@/app/components/ui/meteors'
 import {Input} from '@nextui-org/react'
 import {Textarea} from '@nextui-org/input'
-import api from '@/services/api'
 import {toast} from 'sonner'
 import Waves from '../ui/waves'
 import sendContactForm from '@/services/contact'
@@ -11,20 +9,6 @@ import sendContactForm from '@/services/contact'
 export default function ContactForm() {
     const [errors, setErrors] = useState({} as { [key: string]: { field: string, message: string } })
     const [cooldown, setCooldown] = useState(0)
-
-    function sortErrors(errors: any) {
-        const errorsSorted = {}
-        for (const errorIndex in errors) {
-            const error = errors[errorIndex]
-
-            // @ts-ignore
-            errorsSorted[error.field] = {
-                field: error.field,
-                message: error.message
-            }
-        }
-        setErrors(errorsSorted)
-    }
 
     useEffect(() => {
         if (cooldown > 0) {
@@ -71,6 +55,7 @@ export default function ContactForm() {
               position: "top-center",
               duration: 5000,
             })
+
           } else {
 
             toast.success("Your contact request has been sent !", {
