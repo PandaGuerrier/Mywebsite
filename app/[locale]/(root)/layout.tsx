@@ -14,44 +14,51 @@ const HomeLayout = ({children}: {
   const [isLoad, setLoading] = useState(false)
 
   useEffect(() => {
-    setTimeout(() => {
+    const timer = setTimeout(() => {
       setLoading(true)
-    }, 1000)
+    }, 1200)
+    return () => clearTimeout(timer)
   }, [])
 
   return (
-      <NextUIProvider className="w-full h-full text-foreground bg-transparent cursor-default">
-        <AnimatePresence mode="popLayout" initial={isLoad}>
-          <ThemeProvider>
-              {
-                isLoad ? (
-                    <>
-                      <motion.div
-                          initial={{y: -300, opacity: 0}}
-                          animate={{y: 0, opacity: 1}}
-                          exit={{y: -300, opacity: 0}}
-                          transition={{
-                            type: 'spring',
-                            stiffness: 260,
-                            damping: 20
-                          }}
-                          key="transition"
-                      >
-                        <Navbar/>
-                      </motion.div>
-
-                      {children}
-                    </>
-                ) : (
-                    <div className="flex justify-center items-center h-full bg-black">
-                      <LogoAnimated />
-                    </div>
-                )
-              }
-          </ThemeProvider>
+    <NextUIProvider className="w-full h-full text-foreground bg-transparent cursor-default">
+      <ThemeProvider>
+        <AnimatePresence mode="wait">
+          {!isLoad ? (
+            <motion.div
+              key="loader"
+              initial={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.4, ease: 'easeOut' }}
+              className="fixed inset-0 flex justify-center items-center bg-black z-50"
+            >
+              <LogoAnimated />
+            </motion.div>
+          ) : (
+            <motion.div
+              key="content"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.4, ease: 'easeIn' }}
+            >
+              <motion.div
+                initial={{ y: -100, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{
+                  type: 'spring',
+                  stiffness: 100,
+                  damping: 20,
+                  delay: 0.1
+                }}
+              >
+                <Navbar />
+              </motion.div>
+              {children}
+            </motion.div>
+          )}
         </AnimatePresence>
-      </NextUIProvider>
-
+      </ThemeProvider>
+    </NextUIProvider>
   )
 }
 

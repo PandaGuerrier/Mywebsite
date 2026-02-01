@@ -21,7 +21,7 @@ export default function HeroComponent() {
       <div className={'h-full w-full'}>
         <div className="flex justify-center items-center h-full w-full ">
           <div className="text-center space-y-5 z-20">
-            <div className={'w-[480px] flex flex-col items-center space-y-5'}>
+            <div className={'w-full md:w-[480px] flex flex-col items-center space-y-5'}>
               <TextPressure
                   text="Jules Lofficial"
                   flex={true}
