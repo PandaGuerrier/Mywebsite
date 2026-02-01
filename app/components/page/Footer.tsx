@@ -1,39 +1,51 @@
+'use client'
+
 import React from 'react'
-import { Link } from '@nextui-org/react'
-import LogoAnimated from '@/app/components/animations/LogoAnimated'
+import { motion } from 'framer-motion'
 import SocialNetwork from '@/app/components/page/SocialNetwork'
+import { useTranslations } from 'next-intl'
 
 export default function Footer() {
+  const t = useTranslations('footer')
   const actualYear = new Date().getFullYear()
 
   return (
-      <>
-        <div className="w-full overflow-hidden border border-transparent border-t-gray-200 dark:border-t-gray-800 flex flex-col items-center justify-center rounded-t-lg mt-10">
-          <div className={"h-full w-full max-w-5xl border border-transparent border-x-gray-200 dark:border-x-gray-800 p-5"}>
-            <div className={"w-full h-full justify-start items-center"}>
-              <div className={"flex items-center space-x-5"}>
-                <p className={"font-black text-center w-full"}>Panda Guerrier's portfolio</p>
-              </div>
-
-
-
-            </div>
-            <div className={"flex justify-center items-center w-full  text-xs md:text-base mt-10"}>
-
-              <div className={"space-y-5"}>
-                <div className={"flex justify-center space-x-5"}>
-                  <p>Made with ❤️ by PandaGuerrier</p>
-                  <p>|</p>
-                  <p>©{actualYear} Panda Guerrier</p>
-                </div>
-                <div className={"w-full flex justify-center"}>
-                  <SocialNetwork/>
-                </div>
-              </div>
-            </div>
+    <footer className="border-t border-gray-200 dark:border-gray-800 mt-20">
+      <div className="max-w-6xl mx-auto px-4 py-12">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+          className="flex flex-col md:flex-row items-center justify-between gap-8"
+        >
+          {/* Brand */}
+          <div className="text-center md:text-left">
+            <h3 className="text-xl font-bold text-pink-500 mb-2">
+              {t('portfolio')}
+            </h3>
+            <p className="text-sm text-gray-500 dark:text-gray-400 max-w-xs">
+              {t('description')}
+            </p>
           </div>
-        </div>
-      </>
 
+          {/* Social */}
+          <SocialNetwork className="flex gap-4" />
+        </motion.div>
+
+        {/* Bottom */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          viewport={{ once: true }}
+          className="mt-10 pt-8 border-t border-gray-200 dark:border-gray-800 flex flex-col md:flex-row items-center justify-center gap-4 text-sm text-gray-500"
+        >
+          <span>{t('madeWith')}</span>
+          <span className="hidden md:block">•</span>
+          <span>{t('copyright', { year: actualYear })}</span>
+        </motion.div>
+      </div>
+    </footer>
   )
 }

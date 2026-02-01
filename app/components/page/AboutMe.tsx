@@ -1,10 +1,14 @@
+'use client'
+
 import { Button, Image, Link } from '@nextui-org/react'
 import React from 'react'
-import { TracingBeam } from '@/app/components/ui/tracing-beam'
+import { motion } from 'framer-motion'
 import { AnimatedTooltip } from '@/app/components/ui/animated-tooltip'
 import SocialNetwork from '@/app/components/page/SocialNetwork'
+import { useTranslations } from 'next-intl'
 
 export default function AboutMe() {
+  const t = useTranslations('about')
   const age = Math.floor((Date.now() - new Date('2007-07-22').getTime()) / 31536000000)
 
   const technos = [
@@ -58,106 +62,83 @@ export default function AboutMe() {
     }
   ]
 
-  const dummyContent = [
-    {
-      title: 'Jules Lofficial',
-      description: (
-          <div>
-            <div className={"flex flex-col md:block items-center justify-center space-y-2 md:space-y-0 md:justify-normal md:w-1/2 "}>
-              <SocialNetwork className={"flex justify-center p-5"} />
+  return (
+    <section className="py-20 px-4">
+      <div className="max-w-5xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <span className="inline-block px-4 py-1.5 rounded-full bg-pink-100 dark:bg-pink-900/30 text-pink-600 dark:text-pink-400 text-sm font-medium mb-4">
+            {t('badge')}
+          </span>
+          <h2 className="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white">
+            Jules Lofficial
+          </h2>
+        </motion.div>
+
+        <div className="grid md:grid-cols-5 gap-10 items-start">
+          {/* Photo & Social */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="md:col-span-2 flex flex-col items-center"
+          >
+            <div className="relative mb-6">
               <Image
-                  src="https://res.cloudinary.com/dqsvycncf/image/upload/v1749829039/IMG_6309_1_1_jngvgj.png"
-                  className={"md:float-left rounded-lg mr-5 flex justify-center"}
+                src="https://res.cloudinary.com/dqsvycncf/image/upload/v1749829039/IMG_6309_1_1_jngvgj.png"
+                alt="Jules Lofficial"
+                className="rounded-2xl w-64 h-64 object-cover border-2 border-gray-200 dark:border-gray-700"
               />
             </div>
+            <SocialNetwork className="flex justify-center gap-4" />
+          </motion.div>
 
-
-            <div className={'text-lg md:text-lg mt-5 space-y-2'}>
+          {/* Bio */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            viewport={{ once: true }}
+            className="md:col-span-3 space-y-6"
+          >
+            <div className="space-y-4 text-gray-600 dark:text-gray-300 leading-relaxed">
               <p>
-                Hey, my name is <span className={"bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent"}>Jules</span>, I am a {age} years old french developer. I am passionate about programming and I
-                am   always looking for new challenges.
+                {t('intro')} <span className="font-bold text-pink-500">Jules</span>
+                {t('description1', { age })}
               </p>
+              <p>{t('description2')}</p>
               <p>
-                It all started when I was 12 years old, I discovered the world of programming and I immediately fell in
-                love with it. I started with Javascript, with create Discord bot, and then I discovered the world of development with Java,
-                Dart, etc..
-
-                I love to create new things, I'm was working on a minecraft server called Conodia but it close, and I'm also in a Discord's bot framework project called <Link href={"https://discord.gg/M2cSPjK4SG"} target={"_blank"}>Mineral</Link>.
+                {t('description3')} <Link href="https://discord.gg/M2cSPjK4SG" target="_blank" className="text-pink-500 hover:underline">Mineral</Link>.
               </p>
-              <p>
-                I am currently studying at a high school in France, and here my goal is to become a software engineer. I
-                am also a freelancer and I am always looking for new projects to work on.
-              </p>
-              <p className={'mt-5'}>
-                Here what are my lovelies stacks:
-
-                <div className="flex flex-row items-center justify-center my-10 w-full space-x-5">
-                  <AnimatedTooltip items={technos}/>
-                </div>
-              </p>
-              <Link href={'#contact'} className={'w-full'}>
-                <Button fullWidth variant={'flat'} color={'primary'} radius="full" className={'mt-5'}>
-                  Contact me
-                </Button>
-              </Link>
+              <p>{t('description4')}</p>
             </div>
-          </div>
-      ),
-      badge: 'About Me',
-      image: null
-    },
-    /*{
-      title: 'Conodia',
-      description: (
-          <div className={'text-md md:text-lg'}>
-            <p>
-              Conodia is a minecraft Pvp Faction, I am the founder and the developer of the server. I am currently
-              working on the development of the server and I am looking for new staff to join this aventure !.
-              It's a project that I started in 2021 and I am still working on it, I want to be a famous minecraft server
-              but the minecraft community is going to die, so we had a big change: be a modded minecraft server.
-            </p>
-            <Link href={'https://discord.gg/conodia'} target={'_blank'} className={'w-full'}>
-              <Button fullWidth variant={'flat'} color={'primary'} radius="full" className={'mt-5'}>
-                Join us
+
+            {/* Tech Stack */}
+            <div className="pt-6 border-t border-gray-200 dark:border-gray-700">
+              <p className="text-sm text-gray-500 mb-6">{t('stacks')}</p>
+              <div className="flex flex-row items-center justify-start gap-2">
+                <AnimatedTooltip items={technos} />
+              </div>
+            </div>
+
+            {/* CTA */}
+            <Link href="#contact" className="block">
+              <Button
+                size="lg"
+                className="w-full md:w-auto bg-pink-500 text-white"
+              >
+                {t('contactMe')}
               </Button>
             </Link>
-          </div>
-      ),
-      badge: 'Project',
-      image:
-          'https://conodia.fr/storage/img/logofond.png'
-    }*/
-  ]
-
-  return (
-      <div>
-          <div className="max-w-2xl mx-auto antialiased pt-4 relative">
-            {dummyContent.map((item, index) => (
-                <div key={`content-${index}`} className="mb-10">
-                  <h2 className="bg-blue-500 text-white rounded-full text-sm w-fit px-4 py-1 mb-4">
-                    {item.badge}
-                  </h2>
-
-                  <p className={'text-xl mb-4'}>
-                    {item.title}
-                  </p>
-
-                  <div className="text-sm  prose prose-sm dark:prose-invert">
-                    {item?.image && (
-                        <Image
-                            src={item.image}
-                            alt="blog thumbnail"
-                            height="1000"
-                            width="1000"
-                            className="rounded-lg mb-10 object-cover"
-                        />
-                    )}
-                    {item.description}
-                  </div>
-                </div>
-            ))}
-          </div>
+          </motion.div>
+        </div>
       </div>
-
+    </section>
   )
 }

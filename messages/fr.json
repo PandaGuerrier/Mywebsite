@@ -1,0 +1,100 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "about": "À propos",
+    "projects": "Projets",
+    "contact": "Contact",
+    "openMenu": "Ouvrir le menu",
+    "closeMenu": "Fermer le menu"
+  },
+  "hero": {
+    "subtitle": "Développeur français",
+    "showMore": "Découvrir",
+    "contactMe": "Me contacter"
+  },
+  "about": {
+    "badge": "À propos",
+    "intro": "Salut, je m'appelle",
+    "description1": ", j'ai {age} ans et je suis développeur français. Je suis passionné par la programmation et je suis toujours à la recherche de nouveaux défis.",
+    "description2": "Tout a commencé quand j'avais 12 ans, j'ai découvert le monde de la programmation et j'en suis immédiatement tombé amoureux. J'ai commencé avec Javascript, en créant des bots Discord, puis j'ai découvert le monde du développement avec Java, Dart, etc..",
+    "description3": "J'adore créer de nouvelles choses, je travaillais sur un serveur Minecraft appelé Conodia mais il a fermé, et je suis aussi dans un projet de framework de bots Discord appelé",
+    "description4": "Je suis actuellement étudiant au lycée en France, et mon objectif est de devenir ingénieur logiciel. Je suis aussi freelance et je suis toujours à la recherche de nouveaux projets.",
+    "stacks": "Voici mes technologies préférées :",
+    "contactMe": "Me contacter"
+  },
+  "testimonials": {
+    "title": "Ce que disent mes clients",
+    "subtitle": "Plus de 50 clients satisfaits"
+  },
+  "projects": {
+    "title": "Mes Projets",
+    "subtitle": "Une sélection de mes projets les plus significatifs",
+    "all": "Tous",
+    "student": "Étudiant",
+    "personal": "Personnel",
+    "readMore": "En savoir plus",
+    "close": "Fermer",
+    "viewProject": "Voir le projet",
+    "exprefrei": {
+      "title": "Expr'efrei",
+      "description": "Un projet associatif étudiant à Efrei Paris",
+      "text": {
+        "intro": "Expr'efrei est un projet étudiant développé dans le cadre de mes études à Efrei Paris. Ce projet démontre ma capacité à travailler en équipe et à livrer des solutions de qualité.",
+        "feature1Title": "Collaboration étudiante :",
+        "feature1Text": "Ce projet a été développé en collaboration avec d'autres étudiants, nous permettant de pratiquer le travail d'équipe et la méthodologie agile.",
+        "feature2Title": "Compétences techniques :",
+        "feature2Text": "Le projet m'a permis d'approfondir mes connaissances en technologies web modernes et d'appliquer les concepts appris durant ma formation.",
+        "conclusion": "Cette expérience a renforcé ma passion pour le développement et mon envie de créer des solutions innovantes."
+      }
+    },
+    "conodia": {
+      "title": "Conodia",
+      "description": "Serveur Minecraft innovant avec plugins personnalisés",
+      "text": {
+        "intro": "Le projet Conodia est un serveur Minecraft innovant conçu et développé par Jules Lofficial. Ce projet se distingue par sa complexité technique et son haut niveau de personnalisation, offrant une expérience unique aux joueurs.",
+        "feature1Title": "Développement complet et personnalisé :",
+        "feature1Text": "Jules a créé tous les plugins Minecraft pour le serveur, introduisant plus de 95 commandes disponibles dès le lancement. Ces plugins ont été créés sur mesure pour répondre aux besoins spécifiques du serveur.",
+        "feature2Title": "Technologie avancée et intégration :",
+        "feature2Text": "Une API web RESTful et un système WebSocket ont été développés pour connecter le serveur Minecraft aux bots Discord. Cela permet une interaction fluide entre le jeu et la plateforme Discord.",
+        "feature3Title": "Lancement réussi :",
+        "feature3Text": "Lors de son lancement, le serveur a enregistré plus de 95 joueurs connectés simultanément, démontrant la popularité initiale du projet.",
+        "conclusion": "Ce projet reflète les compétences techniques de Jules et sa capacité à créer une expérience amusante et immersive pour une communauté de joueurs."
+      }
+    },
+    "mineral": {
+      "title": "Mineral",
+      "description": "Framework de bots Discord construit avec Dart",
+      "text": {
+        "intro": "Le projet Mineral est une initiative de développement d'applications où Baptiste Parmentier et Jules Lofficial ont travaillé ensemble. Ce projet se concentre sur la création de bots Discord avancés utilisant Dart.",
+        "feature1Title": "Expertise collaborative :",
+        "feature1Text": "Jules et Baptiste ont collaboré pour développer des bots Discord avec des fonctionnalités sur mesure et une fonctionnalité robuste. Ces bots sont créés avec Dart, assurant des performances efficaces et évolutives.",
+        "feature2Title": "Framework personnalisé :",
+        "feature2Text": "Le projet utilise un framework unique spécialement conçu pour le développement de bots Discord. Ce framework permet des cycles de développement plus rapides.",
+        "conclusion": "Ce projet démontre la capacité à exploiter les technologies modernes comme Dart pour créer des outils qui enrichissent l'expérience de la communauté Discord."
+      }
+    }
+  },
+  "contact": {
+    "title": "Discutons",
+    "subtitle": "Je suis toujours ouvert aux nouvelles opportunités et projets",
+    "name": "Nom",
+    "namePlaceholder": "Jean Dupont",
+    "email": "Email",
+    "emailPlaceholder": "jean@exemple.com",
+    "subject": "Sujet",
+    "subjectPlaceholder": "De quoi s'agit-il ?",
+    "message": "Message",
+    "messagePlaceholder": "Parlez-moi de votre projet...",
+    "send": "Envoyer",
+    "wait": "Patientez {seconds}s",
+    "success": "Message envoyé avec succès !",
+    "error": "Une erreur s'est produite. Veuillez réessayer.",
+    "required": "Le champ {field} est requis."
+  },
+  "footer": {
+    "portfolio": "Panda Guerrier",
+    "description": "Développeur français passionné par la création de solutions innovantes",
+    "madeWith": "Fait avec ❤️",
+    "copyright": "© {year} Tous droits réservés"
+  }
+}

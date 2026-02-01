@@ -1,0 +1,100 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About me",
+    "projects": "Projects",
+    "contact": "Contact",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
+  "hero": {
+    "subtitle": "French developer",
+    "showMore": "Discover",
+    "contactMe": "Contact me"
+  },
+  "about": {
+    "badge": "About Me",
+    "intro": "Hey, my name is",
+    "description1": ", I am a {age} years old french developer. I am passionate about programming and I am always looking for new challenges.",
+    "description2": "It all started when I was 12 years old, I discovered the world of programming and I immediately fell in love with it. I started with Javascript, with create Discord bot, and then I discovered the world of development with Java, Dart, etc..",
+    "description3": "I love to create new things, I'm was working on a minecraft server called Conodia but it close, and I'm also in a Discord's bot framework project called",
+    "description4": "I am currently studying at a high school in France, and here my goal is to become a software engineer. I am also a freelancer and I am always looking for new projects to work on.",
+    "stacks": "Here what are my lovelies stacks:",
+    "contactMe": "Contact me"
+  },
+  "testimonials": {
+    "title": "What my clients say",
+    "subtitle": "Over 50 satisfied customers"
+  },
+  "projects": {
+    "title": "My Projects",
+    "subtitle": "A selection of my most significant projects",
+    "all": "All",
+    "student": "Student",
+    "personal": "Personal",
+    "readMore": "Read more",
+    "close": "Close",
+    "viewProject": "View project",
+    "exprefrei": {
+      "title": "Expr'efrei",
+      "description": "A student association project at Efrei Paris",
+      "text": {
+        "intro": "Expr'efrei is a student project developed as part of my studies at Efrei Paris. This project demonstrates my ability to work in a team and deliver quality solutions.",
+        "feature1Title": "Student Collaboration:",
+        "feature1Text": "This project was developed in collaboration with other students, allowing us to practice teamwork and agile methodology.",
+        "feature2Title": "Technical Skills:",
+        "feature2Text": "The project allowed me to deepen my knowledge in modern web technologies and apply the concepts learned during my training.",
+        "conclusion": "This experience reinforced my passion for development and my desire to create innovative solutions."
+      }
+    },
+    "conodia": {
+      "title": "Conodia",
+      "description": "Innovative Minecraft server with custom plugins",
+      "text": {
+        "intro": "The Conodia project is an innovative Minecraft server designed and developed by Jules Lofficial. This project stands out for its technical complexity and high level of customization, offering a unique experience for players.",
+        "feature1Title": "Complete and Custom Development:",
+        "feature1Text": "Jules created all the Minecraft plugins for the server, introducing more than 95 commands available from the very beginning. These plugins were custom-built to meet the specific needs of the server.",
+        "feature2Title": "Advanced Technology and Integration:",
+        "feature2Text": "A RESTful web API and a WebSocket system were developed to connect the Minecraft server to Discord bots. This allows seamless interaction between the game and the Discord platform.",
+        "feature3Title": "Successful Launch:",
+        "feature3Text": "At its launch, the server recorded over 95 players connected simultaneously, demonstrating the project's initial popularity.",
+        "conclusion": "This project reflects Jules' technical skills and his ability to create a fun and immersive experience for a gaming community."
+      }
+    },
+    "mineral": {
+      "title": "Mineral",
+      "description": "Discord bot framework built with Dart",
+      "text": {
+        "intro": "The Mineral project is an application development initiative where Baptiste Parmentier and Jules Lofficial worked together. This project focuses on creating advanced Discord bots using Dart.",
+        "feature1Title": "Collaborative Expertise:",
+        "feature1Text": "Jules and Baptiste collaborated to develop Discord bots with tailored features and robust functionality. These bots are created using Dart, ensuring efficient and scalable performance.",
+        "feature2Title": "Custom Framework:",
+        "feature2Text": "The project leverages a unique framework specifically designed for Discord bot development. This framework enables faster development cycles.",
+        "conclusion": "This project showcases the ability to leverage modern technologies like Dart to build tools that enrich the Discord community experience."
+      }
+    }
+  },
+  "contact": {
+    "title": "Let's Talk",
+    "subtitle": "I'm always open to new opportunities and projects",
+    "name": "Name",
+    "namePlaceholder": "John Doe",
+    "email": "Email",
+    "emailPlaceholder": "john@example.com",
+    "subject": "Subject",
+    "subjectPlaceholder": "What's this about?",
+    "message": "Message",
+    "messagePlaceholder": "Tell me about your project...",
+    "send": "Send Message",
+    "wait": "Wait {seconds}s",
+    "success": "Message sent successfully!",
+    "error": "An error occurred. Please try again.",
+    "required": "{field} is required."
+  },
+  "footer": {
+    "portfolio": "Panda Guerrier",
+    "description": "French developer passionate about creating innovative solutions",
+    "madeWith": "Made with ❤️",
+    "copyright": "© {year} All rights reserved"
+  }
+}

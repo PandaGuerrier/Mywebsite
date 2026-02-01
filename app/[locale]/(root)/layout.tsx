@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react'
 import { NextUIProvider } from '@nextui-org/react'
-import Navbar from '../components/NavBar'
+import Navbar from '@/app/components/NavBar'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ThemeProvider } from '@/app/hooks/useTheme'
 import LogoAnimated from '@/app/components/animations/LogoAnimated'

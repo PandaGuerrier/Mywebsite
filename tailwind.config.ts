@@ -13,7 +13,6 @@ const config: Config = {
     './node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}'
   ],
   theme: {
-    // rest of the code
     extend: {
       animation: {
         scroll:
@@ -60,7 +59,46 @@ const config: Config = {
   },
   darkMode: 'class',
   plugins: [
-    nextui(),
+    nextui({
+      themes: {
+        light: {
+          colors: {
+            primary: {
+              50: "#FFF5F7",
+              100: "#FFEBEF",
+              200: "#FFD6DF",
+              300: "#FFC2CF",
+              400: "#FFADBF",
+              500: "#FF99AF",
+              600: "#E68A9E",
+              700: "#CC7A8D",
+              800: "#B36B7C",
+              900: "#995C6B",
+              DEFAULT: "#FF99AF",
+              foreground: "#FFFFFF",
+            },
+          },
+        },
+        dark: {
+          colors: {
+            primary: {
+              50: "#FFF5F7",
+              100: "#FFEBEF",
+              200: "#FFD6DF",
+              300: "#FFC2CF",
+              400: "#FFADBF",
+              500: "#FF99AF",
+              600: "#E68A9E",
+              700: "#CC7A8D",
+              800: "#B36B7C",
+              900: "#995C6B",
+              DEFAULT: "#FF99AF",
+              foreground: "#FFFFFF",
+            },
+          },
+        },
+      },
+    }),
     addVariablesForColors,
   ]
 

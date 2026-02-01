@@ -1,167 +1,190 @@
-import React, {useEffect, useState} from 'react'
-import {MovingBorderButton} from '@/app/components/ui/moving-border'
-import {Input} from '@nextui-org/react'
-import {Textarea} from '@nextui-org/input'
-import {toast} from 'sonner'
-import Waves from '../ui/waves'
+'use client'
+
+import React, { useEffect, useState } from 'react'
+import { motion } from 'framer-motion'
+import { Input, Button, Textarea } from '@nextui-org/react'
+import { toast } from 'sonner'
 import sendContactForm from '@/services/contact'
+import { useTranslations } from 'next-intl'
+import { Mail, User, MessageSquare, Send } from 'lucide-react'
 
 export default function ContactForm() {
-    const [errors, setErrors] = useState({} as { [key: string]: { field: string, message: string } })
-    const [cooldown, setCooldown] = useState(0)
+  const t = useTranslations('contact')
+  const [errors, setErrors] = useState<{ [key: string]: { field: string; message: string } }>({})
+  const [cooldown, setCooldown] = useState(0)
+  const [isLoading, setIsLoading] = useState(false)
 
-    useEffect(() => {
-        if (cooldown > 0) {
-            const interval = setInterval(() => {
-                setCooldown(cooldown - 1)
-            }, 1000)
-            return () => clearInterval(interval)
-        }
-    }, [cooldown])
+  useEffect(() => {
+    if (cooldown > 0) {
+      const interval = setInterval(() => {
+        setCooldown(cooldown - 1)
+      }, 1000)
+      return () => clearInterval(interval)
+    }
+  }, [cooldown])
 
-    const sendContact = async (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault()
-        setCooldown(3)
+  const sendContact = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    setIsLoading(true)
+    setCooldown(3)
 
-        const form = event.currentTarget;
-        const formData = new FormData(form);
-        const newErrors: { [key: string]: { field: string, message: string } } = {};
+    const form = event.currentTarget
+    const formData = new FormData(form)
+    const newErrors: { [key: string]: { field: string; message: string } } = {}
 
-      const entries = Array.from(formData.entries());
-      for (const [key, value] of entries) {
-        if (!value) {
-          newErrors[key] = {
-            field: key,
-            message: `${key.charAt(0).toUpperCase() + key.slice(1)} is required.`,
-          };
+    const entries = Array.from(formData.entries())
+    for (const [key, value] of entries) {
+      if (!value) {
+        newErrors[key] = {
+          field: key,
+          message: t('required', { field: key.charAt(0).toUpperCase() + key.slice(1) }),
         }
       }
-        if (Object.keys(newErrors).length > 0) {
-            setErrors(newErrors);
-            return;
-        }
-
-        try {
-          const name = formData.get('name')! as string
-          const email = formData.get('email')! as string
-          const subject = formData.get('subject')! as string
-          const message = formData.get('message')! as string
-
-          const success = await sendContactForm(name, email, subject, message)
-
-          if (!success) {
-
-            toast.error("An error occurred while sending your contact request. Please try again later.", {
-              position: "top-center",
-              duration: 5000,
-            })
-
-          } else {
-
-            toast.success("Your contact request has been sent !", {
-              position: "top-center",
-              duration: 5000,
-            })
-          }
-
-            // @ts-ignore
-            document.getElementById('contact-form')?.reset()
-            setErrors({})
-        } catch (e: any) {
-            console.log(e)
-            return;
-        }
     }
-    return (
-        <>
-            <div className="w-full flex justify-center">
-                <div className="w-full relative max-w-5xl">
-                    <div
-                        className="absolute inset-0 h-full w-full bg-gradient-to-r dark:from-blue-500 dark:to-teal-500 transform scale-[0.80] bg-blue-500 rounded-full blur-3xl"/>
-                    <div
-                        className="relative shadow-xl bg-gray-100 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 px-4 py-8 h-full overflow-hidden rounded-2xl flex flex-col justify-end items-start">
-                        <Waves
 
-                            lineColor="oklch(27.9% 0.041 260.031)"
-                            waveSpeedX={0.02}
-                            waveSpeedY={0.01}
-                            waveAmpX={40}
-                            waveAmpY={20}
-                            friction={0.9}
-                            tension={0.01}
-                            maxCursorMove={120}
-                            xGap={12}
-                            yGap={36}
-                            className={'dark:opacity-80 opacity-10 absolute top-0 left-0 w-full h-full z-0 pointer-events-none'}
-                        />
-                        <h1 className="font-bold text-2xl text-black dark:text-white mb-4 relative z-50 text-center w-full">
-                            Contact Me
-                        </h1>
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors)
+      setIsLoading(false)
+      return
+    }
 
-                        <form onSubmit={sendContact} id={"contact-form"} className={"w-full space-y-5 relative z-10"}>
-                            <div className={"w-full flex space-x-3"}>
-                                <Input
-                                    label="Name"
-                                    name="name"
-                                    placeholder="Enter your name"
-                                    type="text"
-                                    variant="bordered"
-                                    color={errors.name ? 'danger' : 'primary'}
-                                    errorMessage={errors.name?.message}
-                                    required
-                                    fullWidth
-                                />
-                                <Input
-                                    autoFocus
-                                    name="email"
-                                    label="Email"
-                                    placeholder="Enter your email"
-                                    variant="bordered"
-                                    color={errors.email ? 'danger' : 'primary'}
-                                    errorMessage={errors.email?.message}
-                                    fullWidth
-                                />
-                            </div>
-                            <Input
-                                label="Subject"
-                                name="subject"
-                                placeholder="Enter the subject"
-                                type="text"
-                                variant="bordered"
-                                color={errors.subject ? 'danger' : 'primary'}
-                                errorMessage={errors.subject?.message}
-                                required
-                                fullWidth
-                            />
+    try {
+      const name = formData.get('name') as string
+      const email = formData.get('email') as string
+      const subject = formData.get('subject') as string
+      const message = formData.get('message') as string
 
-                            <Textarea
-                                label="Message"
-                                name="message"
-                                placeholder="Enter your message"
-                                type="text"
-                                variant="bordered"
-                                color={errors.message ? 'danger' : 'primary'}
-                                errorMessage={errors.message?.message}
-                                required
-                                fullWidth
-                            />
+      const success = await sendContactForm(name, email, subject, message)
 
-                            <MovingBorderButton duration={5000} containerClassName={"h-[50px] w-full"}
-                                                disabled={cooldown != 0} as={"button"} type={"submit"}>
-                                <h1 className="text-black dark:text-white md:text-base text-sm">
-                                    {
-                                        cooldown > 0 ? `Wait ${cooldown}s before resend` : "Send Message"
-                                    }
-                                </h1>
-                            </MovingBorderButton>
-                        </form>
+      if (!success) {
+        toast.error(t('error'), {
+          position: 'top-center',
+          duration: 5000,
+        })
+      } else {
+        toast.success(t('success'), {
+          position: 'top-center',
+          duration: 5000,
+        })
+        form.reset()
+      }
 
-                        {/* Meaty part - Meteor effect */}
+      setErrors({})
+    } catch (e) {
+      console.log(e)
+      toast.error(t('error'), {
+        position: 'top-center',
+        duration: 5000,
+      })
+    } finally {
+      setIsLoading(false)
+    }
+  }
 
-                    </div>
-                </div>
-            </div>
-        </>
+  return (
+    <section className="py-20 px-4">
+      <div className="max-w-3xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="text-center mb-12"
+        >
+          <h2 className="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-3">
+            {t('title')}
+          </h2>
+          <p className="text-gray-500 dark:text-gray-400 text-base max-w-xl mx-auto">
+            {t('subtitle')}
+          </p>
+        </motion.div>
 
-    )
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          viewport={{ once: true }}
+        >
+          <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 p-8 md:p-10">
+            <form onSubmit={sendContact} className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <Input
+                  label={t('name')}
+                  name="name"
+                  placeholder={t('namePlaceholder')}
+                  type="text"
+                  variant="bordered"
+                  size="lg"
+                  color={errors.name ? 'danger' : 'default'}
+                  errorMessage={errors.name?.message}
+                  startContent={<User className="w-4 h-4 text-gray-400" />}
+                  classNames={{
+                    input: 'text-gray-900 dark:text-white',
+                    inputWrapper: 'border-gray-200 dark:border-gray-700 hover:border-pink-400 focus-within:border-pink-500',
+                  }}
+                />
+                <Input
+                  label={t('email')}
+                  name="email"
+                  placeholder={t('emailPlaceholder')}
+                  type="email"
+                  variant="bordered"
+                  size="lg"
+                  color={errors.email ? 'danger' : 'default'}
+                  errorMessage={errors.email?.message}
+                  startContent={<Mail className="w-4 h-4 text-gray-400" />}
+                  classNames={{
+                    input: 'text-gray-900 dark:text-white',
+                    inputWrapper: 'border-gray-200 dark:border-gray-700 hover:border-pink-400 focus-within:border-pink-500',
+                  }}
+                />
+              </div>
+
+              <Input
+                label={t('subject')}
+                name="subject"
+                placeholder={t('subjectPlaceholder')}
+                type="text"
+                variant="bordered"
+                size="lg"
+                color={errors.subject ? 'danger' : 'default'}
+                errorMessage={errors.subject?.message}
+                startContent={<MessageSquare className="w-4 h-4 text-gray-400" />}
+                classNames={{
+                  input: 'text-gray-900 dark:text-white',
+                  inputWrapper: 'border-gray-200 dark:border-gray-700 hover:border-pink-400 focus-within:border-pink-500',
+                }}
+              />
+
+              <Textarea
+                label={t('message')}
+                name="message"
+                placeholder={t('messagePlaceholder')}
+                variant="bordered"
+                size="lg"
+                minRows={5}
+                color={errors.message ? 'danger' : 'default'}
+                errorMessage={errors.message?.message}
+                classNames={{
+                  input: 'text-gray-900 dark:text-white',
+                  inputWrapper: 'border-gray-200 dark:border-gray-700 hover:border-pink-400 focus-within:border-pink-500',
+                }}
+              />
+
+              <Button
+                type="submit"
+                size="lg"
+                isLoading={isLoading}
+                isDisabled={cooldown > 0}
+                className="w-full bg-pink-500 text-white font-medium"
+                endContent={!isLoading && <Send className="w-4 h-4" />}
+              >
+                {cooldown > 0 ? t('wait', { seconds: cooldown }) : t('send')}
+              </Button>
+            </form>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  )
 }

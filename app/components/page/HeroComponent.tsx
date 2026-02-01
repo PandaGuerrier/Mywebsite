@@ -1,10 +1,14 @@
-import AnnounceComponent from '@/app/components/AnnounceComponent'
+'use client'
+
 import { Button, Link } from '@nextui-org/react'
 import React from 'react'
 import { Spotlight } from '@/app/components/ui/Spotlight'
 import TextPressure from '../ui/text-pressure'
+import { useTranslations } from 'next-intl'
 
 export default function HeroComponent() {
+  const t = useTranslations('hero')
+
   return (
     <>
       <div
@@ -12,17 +16,14 @@ export default function HeroComponent() {
       ></div>
       <Spotlight
           className="-top-40 left-0 md:left-60 md:-top-20"
-          fill="#3b82f6"
+          fill="#FF99AF"
       />
       <div className={'h-full w-full'}>
         <div className="flex justify-center items-center h-full w-full ">
           <div className="text-center space-y-5 z-20">
-            <div className={'flex w-full justify-center'}>
-              <AnnounceComponent message={'New portofolio !'}/>
-            </div>
             <div className={'w-[480px] flex flex-col items-center space-y-5'}>
               <TextPressure
-                  text="Panda Guerrier"
+                  text="Jules Lofficial"
                   flex={true}
                   alpha={false}
                   stroke={false}
@@ -33,23 +34,23 @@ export default function HeroComponent() {
                   strokeColor="#ff0000"
                   minFontSize={80}
               />
-              <h2 className={'text-gray-300 text-xl md:text-3xl'}><span
-                  className={'bg-gradient-to-r from-blue-600 to-indigo-400 inline-block text-transparent bg-clip-text'}>
-                    French developer
-                  </span>
+              <h2 className={'text-gray-400 text-xl md:text-3xl'}>
+                <span className={'text-pink-400'}>
+                  {t('subtitle')}
+                </span>
               </h2>
             </div>
 
             <div className={'mt-52 space-x-5'}>
               <Link href={'#about'}>
-                <Button variant={'flat'} color={'primary'} radius="full">
-                  Show more
+                <Button variant={'flat'} className="bg-pink-500 text-white" radius="full">
+                  {t('showMore')}
                 </Button>
               </Link>
 
               <Link href={'#contact'}>
-                <Button variant={'ghost'} color={'primary'} radius="full">
-                  Contact me
+                <Button variant={'bordered'} className="border-pink-500 text-pink-500" radius="full">
+                  {t('contactMe')}
                 </Button>
               </Link>
             </div>

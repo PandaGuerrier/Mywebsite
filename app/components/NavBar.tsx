@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react'
 import {
   Link,
@@ -10,28 +12,31 @@ import {
   NavbarMenuToggle
 } from '@nextui-org/react'
 import { ThemeContext } from '@/app/hooks/useTheme'
+import { useTranslations } from 'next-intl'
+import LanguageSwitcher from './LanguageSwitcher'
 
 export default function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [linkEnable, setLinkEnabled] = React.useState(0)
   const {theme, toggleTheme} = React.useContext(ThemeContext)
   const [actualTheme, setActualTheme] = React.useState(theme)
+  const t = useTranslations('nav')
 
   const links = [
     {
-      name: "Home",
+      name: t('home'),
       link: "#",
     },
     {
-      name: "About me",
+      name: t('about'),
       link: "#about"
     },
     {
-      name: "Projects",
+      name: t('projects'),
       link: "#projects"
     },
     {
-      name: "Contact",
+      name: t('contact'),
       link: "#contact"
     }
   ]
@@ -47,7 +52,7 @@ export default function NavBar() {
       <Navbar onMenuOpenChange={setIsMenuOpen} isBordered className="fixed cursor-default" shouldHideOnScroll>
         <NavbarContent>
           <NavbarMenuToggle
-              aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+              aria-label={isMenuOpen ? t('closeMenu') : t('openMenu')}
               className="sm:hidden"
           />
           <NavbarBrand>
@@ -67,6 +72,7 @@ export default function NavBar() {
           }
         </NavbarContent>
         <NavbarContent justify="end">
+          <LanguageSwitcher />
           <button
               onClick={() => changeTheme()}
               className="p-4 text-inherit">{
@@ -97,5 +103,3 @@ export default function NavBar() {
       </Navbar>
   );
 }
-
-//                       item.link == router.pathname ? "primary" : "foreground"
